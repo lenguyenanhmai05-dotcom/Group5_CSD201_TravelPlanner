@@ -69,3 +69,31 @@ public class TourLinkedListTest {
                 list.insertAfter("DN",
                         new TourLocation("HA", "Hoi An", "Desc", 400))
         );
+          // TEST 4: Add First
+        list.addFirst(new TourLocation("HCM", "Ho Chi Minh", "Desc", 0));
+        System.out.println("After addFirst:");
+        System.out.println(list.print());
+
+        // TEST 5: Insert after ID không tồn tại
+        System.out.println("Insert after non-existing ID:");
+        System.out.println(
+                list.insertAfter("ABC",
+                        new TourLocation("DN", "Da Nang", "Desc", 500))
+        );
+
+        // TEST 6: Add Last
+        list.addLast(new TourLocation("HUE", "Hue", "Desc", 300));
+        System.out.println("After addLast:");
+        System.out.println(list.print());
+
+        // TEST 7: Remove head
+        list.removeById("HCM");
+        System.out.println("After remove HCM:");
+        System.out.println(list.print());
+
+        // TEST 8: Size
+        System.out.println("Size = " + list.size());
+
+        System.out.println("=== ALL TESTS COMPLETED (NO EXCEPTION) ===");
+    }
+}
