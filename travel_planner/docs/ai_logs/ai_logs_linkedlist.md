@@ -432,3 +432,12 @@ Add App class to demonstrate TourLinkedList operations
 
 👉 Giờ bạn copy nguyên đoạn code này, chạy thử.
 Chạy được rồi gửi mình, mình sẽ chia cho bạn tiếp các commit nhỏ cho đủ 10 commit (mỗi commit rất hợp lý, không bị “dồn code” nha).
+
+Output:
+PS C:\Group5_CSD201_TravelPlanner>  & 'C:\Program Files\Java\jdk-21\bin\java.exe' '-XX:+ShowCodeDetailsInExceptionMessages' '-cp' 'C:\Group5_CSD201_TravelPlanner\travel_planner\target\classes' 'com.travelplanner.app.App' 
+--- LINKED LIST ---
+1. Ban dau: Ho Chi Minh -> Da Nang -> END
+2. Them Hue vao dau: Hue -> Ho Chi Minh -> Da Nang -> END
+3. Chen Hoi An sau Da Nang: Hue -> Ho Chi Minh -> Da Nang -> Hoi An -> END
+4. Xoa HCM: Hue -> Da Nang -> Hoi An -> END
+PS C:\Group5_CSD201_TravelPlanner> 
