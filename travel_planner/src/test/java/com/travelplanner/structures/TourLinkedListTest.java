@@ -36,8 +36,21 @@ public class TourLinkedListTest {
         assertTrue(result);
         assertEquals("A -> B -> C -> END", list.print());
     }
-
+    @Test
+    public void testRemoveById() {
+        TourLinkedList list = new TourLinkedList();
+        list.addLast(createLoc("1", "A"));
+        list.addLast(createLoc("2", "B"));
+        list.addLast(createLoc("3", "C"));
+        
+        list.removeById("2"); // Xoá giữa
+        assertEquals("A -> C -> END", list.print());
+        
+        list.removeById("1"); // Xoá đầu
+        assertEquals("C -> END", list.print());
+    }
 }
+
 
 
 
