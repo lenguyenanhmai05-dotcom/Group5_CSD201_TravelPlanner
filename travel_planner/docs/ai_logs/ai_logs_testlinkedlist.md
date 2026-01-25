@@ -67,5 +67,9 @@ public class TourLinkedListTest {
         // TEST 4: Add First null safety
         list.addFirst(new TourLocation("HCM", "Ho Chi Minh", "Desc", 0));
         System.out.println(list.print());
-
-       
+        
+         // TEST 5: Insert after ID không tồn tại
+        System.out.println("Insert after non-existing ID:");
+        System.out.println(list.insertAfter("ABC",
+                new TourLocation("DN", "Da Nang", "Desc", 500)));
+     
