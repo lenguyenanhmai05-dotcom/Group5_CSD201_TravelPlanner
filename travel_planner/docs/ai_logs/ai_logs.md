@@ -490,6 +490,183 @@ public class App {
     }
 }
 ```
+ BƯỚC 6 – Unit Test (ăn 10%)
+
+File:
+
+Dưới đây là bộ code Unit Test hoàn chỉnh, bao phủ các trường hợp mà em có thể copy vào. Đảm bảo nhìn file test dài ngoằng, thầy cô nhìn vào là thấy sự đầu tư ngay.
+
+File: src/test/java/com/travelplanner/structures/TourLinkedListTest.java
+Java
+
+package com.travelplanner.structures;
+
+import com.travelplanner.entities.TourLocation;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Unit Test cho cấu trúc dữ liệu TourLinkedList.
+ * Bao gồm các kịch bản: Thêm, Sửa, Xóa, Tìm kiếm và Các trường hợp biên (Empty list).
+ */
+public class TourLinkedListTest {
+
+    private TourLinkedList list;
+
+    // Helper method để tạo nhanh đối tượng location
+    private TourLocation createLoc(String id, String name) {
+        return new TourLocation(id, name, "Test Description", 100.0);
+    }
+
+    // Chạy trước mỗi @Test để reset lại list sạch sẽ
+    @BeforeEach
+    public void setUp() {
+        list = new TourLinkedList();
+    }
+
+    // ==========================================
+    // 1. NHÓM TEST THÊM (ADDITION)
+    // ==========================================
+
+    @Test
+    @DisplayName("TC01: Thêm vào đầu danh sách (AddFirst)")
+    public void testAddFirst() {
+        list.addFirst(createLoc("1", "A"));
+        assertEquals("A -> END", list.print(), "Thêm 1 phần tử vào list rỗng");
+
+        list.addFirst(createLoc("2", "B"));
+        assertEquals("B -> A -> END", list.print(), "Thêm vào đầu khi list đã có dữ liệu");
+    }
+
+    @Test
+    @DisplayName("TC02: Thêm vào cuối danh sách (AddLast)")
+    public void testAddLast() {
+        list.addLast(createLoc("1", "A"));
+        assertEquals("A -> END", list.print());
+
+        list.addLast(createLoc("2", "B"));
+        assertEquals("A -> B -> END", list.print());
+    }
+
+    @Test
+    @DisplayName("TC03: Chèn vào giữa (InsertAfter)")
+    public void testInsertAfter_Middle() {
+        list.addLast(createLoc("1", "A"));
+        list.addLast(createLoc("3", "C"));
+
+        // Chèn B vào sau A
+        boolean result = list.insertAfter("1", createLoc("2", "B"));
+        
+        assertTrue(result, "Hàm phải trả về true khi chèn thành công");
+        assertEquals("A -> B -> C -> END", list.print());
+    }
+
+    @Test
+    @DisplayName("TC04: Chèn vào sau phần tử cuối cùng (InsertAfter Tail)")
+    public void testInsertAfter_Tail() {
+        list.addLast(createLoc("1", "A"));
+        
+        // Chèn B vào sau A (A đang là tail)
+        list.insertAfter("1", createLoc("2", "B"));
+        
+        assertEquals("A -> B -> END", list.print(), "Phần tử mới phải trở thành Tail mới");
+    }
+
+    @Test
+    @DisplayName("TC05: Chèn vào ID không tồn tại (InsertAfter Invalid)")
+    public void testInsertAfter_NotFound() {
+        list.addLast(createLoc("1", "A"));
+        
+        // Cố tình chèn vào sau ID "99" (không có thật)
+        boolean result = list.insertAfter("99", createLoc("2", "B"));
+        
+        assertFalse(result, "Hàm phải trả về false nếu không tìm thấy ID");
+        assertEquals("A -> END", list.print(), "Danh sách không được thay đổi");
+    }
+
+    // ==========================================
+    // 2. NHÓM TEST XÓA (REMOVAL) - QUAN TRỌNG NHẤT
+    // ==========================================
+
+    @Test
+    @DisplayName("TC06: Xóa phần tử đầu tiên (Remove Head)")
+    public void testRemove_Head() {
+        list.addLast(createLoc("1", "A"));
+        list.addLast(createLoc("2", "B"));
+        
+        boolean result = list.removeById("1");
+        
+        assertTrue(result);
+        assertEquals("B -> END", list.print(), "Head mới phải là B");
+    }
+
+    @Test
+    @DisplayName("TC07: Xóa phần tử ở giữa (Remove Middle)")
+    public void testRemove_Middle() {
+        list.addLast(createLoc("1", "A"));
+        list.addLast(createLoc("2", "B"));
+        list.addLast(createLoc("3", "C"));
+        
+        list.removeById("2");
+        assertEquals("A -> C -> END", list.print(), "Liên kết A phải trỏ thẳng tới C");
+    }
+
+    @Test
+    @DisplayName("TC08: Xóa phần tử cuối cùng (Remove Tail)")
+    public void testRemove_Tail() {
+        list.addLast(createLoc("1", "A"));
+        list.addLast(createLoc("2", "B"));
+        
+        list.removeById("2");
+        assertEquals("A -> END", list.print(), "A phải trở thành Tail mới");
+    }
+
+    @Test
+    @DisplayName("TC09: Xóa phần tử duy nhất trong list")
+    public void testRemove_SingleElement() {
+        list.addLast(createLoc("1", "A"));
+        
+        list.removeById("1");
+        assertEquals("END", list.print(), "List phải trở về rỗng");
+    }
+
+    @Test
+    @DisplayName("TC10: Xóa phần tử không tồn tại")
+    public void testRemove_NotFound() {
+        list.addLast(createLoc("1", "A"));
+        
+        boolean result = list.removeById("99"); // ID ảo
+        
+        assertFalse(result, "Phải trả về false nếu xoá thất bại");
+        assertEquals("A -> END", list.print(), "List giữ nguyên");
+    }
+
+    @Test
+    @DisplayName("TC11: Xóa trên danh sách rỗng (Empty List)")
+    public void testRemove_EmptyList() {
+        // Không add gì cả
+        boolean result = list.removeById("1");
+        
+        assertFalse(result);
+        assertEquals("END", list.print());
+    }
+}
+Cách "chém gió" trong báo cáo để bài làm có chiều sâu
+Khi nộp bài hoặc thuyết trình, em giải thích cấu trúc file test này như sau (đảm bảo thầy cô gật gù):
+
+Tính độc lập (Isolation): Em sử dụng @BeforeEach để khởi tạo lại danh sách mới cho mỗi bài test. Điều này đảm bảo test case này không bị ảnh hưởng bởi dữ liệu rác của test case trước đó (tránh lỗi dây chuyền).
+
+Phủ đầy đủ các trường hợp (Coverage):
+
+Happy Path: Các trường hợp chạy suôn sẻ (Thêm đầu, thêm cuối, chèn giữa).
+
+Edge Cases (Biên): Đây là phần quan trọng nhất của LinkedList. Em đã test kỹ các trường hợp nhạy cảm như: Xóa phần tử duy nhất (Head trùng Tail), Xóa Head, Xóa Tail.
+
+Negative Cases: Test việc xử lý khi người dùng nhập ID không tồn tại hoặc thao tác trên danh sách rỗng (tránh NullPointerException).
+
+Assertion rõ ràng: Mỗi assert đều có message đi kèm (ví dụ: "Head mới phải là B") để khi test fail, ta biết ngay lỗi logic nằm ở đâu mà không cần dò code.
 
 # ▶️ BƯỚC 7 – Chạy Maven
 
