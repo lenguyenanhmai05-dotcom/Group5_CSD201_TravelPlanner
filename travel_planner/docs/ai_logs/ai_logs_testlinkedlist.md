@@ -64,5 +64,8 @@ public class TourLinkedListTest {
         System.out.println("Insert after on empty list:");
         System.out.println(list.insertAfter("DN",
                 new TourLocation("HA", "Hoi An", "Desc", 400)));
+        // TEST 4: Add First null safety
+        list.addFirst(new TourLocation("HCM", "Ho Chi Minh", "Desc", 0));
+        System.out.println(list.print());
 
        
