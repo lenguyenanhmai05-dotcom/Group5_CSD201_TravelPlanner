@@ -72,4 +72,12 @@ public class TourLinkedListTest {
         System.out.println("Insert after non-existing ID:");
         System.out.println(list.insertAfter("ABC",
                 new TourLocation("DN", "Da Nang", "Desc", 500)));
-     
+        
+        // TEST 6: Size
+
+        System.out.println("Size = " + list.size());
+
+        System.out.println("=== ALL CHECKS SUCCESSFUL (NO EXCEPTIONS) ===");
+
+        }
+    }
