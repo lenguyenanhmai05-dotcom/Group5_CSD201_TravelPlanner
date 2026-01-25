@@ -172,3 +172,263 @@ TourLocation.java (nếu bạn muốn mình rà lại)
 
 hoặc hỏi: bước tiếp theo làm Queue / Stack / Menu console
 mình làm tiếp cho bạn liền nha 💪
+package com.travelplanner.entities;
+
+import java.util.Objects;
+
+public class TourLocation {
+    private String id;
+    private String name;
+    private String description;
+    private double price;
+
+    public TourLocation(String id, String name, String description, double price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
+    // Getters & Setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return name; // Chỉ in tên cho gọn
+    }
+
+    // Quan trọng để so sánh khi xoá/tìm kiếm
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        TourLocation that = (TourLocation) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+}
+package com.travelplanner.structures;
+
+import com.travelplanner.entities.TourLocation;
+
+public class LocationNode {
+    public TourLocation info;
+    public LocationNode next;
+
+    public LocationNode(TourLocation info) {
+        this.info = info;
+        this.next = null;
+    }
+} 
+package com.travelplanner.structures;
+
+import com.travelplanner.entities.TourLocation;
+
+public class TourLinkedList {
+
+    private LocationNode head;
+
+    public TourLinkedList() {
+        head = null;
+    }
+
+    // 1. Thêm vào cuối (Add Last)
+    public void addLast(TourLocation item) {
+        LocationNode node = new LocationNode(item);
+        if (head == null) {
+            head = node;
+            return;
+        }
+        LocationNode temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = node;
+    }
+
+    // 2. Thêm vào đầu (Add First) - MỚI
+    public void addFirst(TourLocation item) {
+        LocationNode newNode = new LocationNode(item);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    // 3. Chèn vào sau một địa điểm (Insert After) - MỚI
+    public boolean insertAfter(String destId, TourLocation item) {
+        LocationNode curr = head;
+        while (curr != null) {
+            if (curr.info.getId().equals(destId)) {
+                LocationNode newNode = new LocationNode(item);
+                newNode.next = curr.next;
+                curr.next = newNode;
+                return true;
+            }
+            curr = curr.next;
+        }
+        return false;
+    }
+
+    // 4. Xoá theo ID
+    public boolean removeById(String id) {
+        if (head == null)
+            return false;
+
+        if (head.info.getId().equals(id)) {
+            head = head.next;
+            return true;
+        }
+
+        LocationNode prev = head;
+        LocationNode cur = head.next;
+
+        while (cur != null) {
+            if (cur.info.getId().equals(id)) {
+                prev.next = cur.next;
+                return true;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+        return false;
+    }
+
+    // 5. In danh sách
+    public String print() {
+        StringBuilder result = new StringBuilder();
+        LocationNode temp = head;
+        while (temp != null) {
+            result.append(temp.info.getName()).append(" -> ");
+            temp = temp.next;
+        }
+        return result.append("END").toString();
+    }
+
+    // 6. Lấy kích thước (Size)
+    public int size() {
+        int count = 0;
+        LocationNode temp = head;
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+        return count;
+    }
+}
+mình làm những cái này rồi ạ bây giờ bạn viết cho mình file app.java để mình chạy với ạ
+
+Ok mình nắm rõ rồi nha 👍
+👉 Bạn đã làm xong hết entities + structures, giờ chỉ còn App.java để chạy demo là chuẩn bài luôn.
+
+Dưới đây là App.java HOÀN CHỈNH, chạy được liền với đúng mấy class bạn gửi.
+
+📁 File: App.java
+package com.travelplanner.app;
+
+import com.travelplanner.entities.TourLocation;
+import com.travelplanner.structures.TourLinkedList;
+
+public class App {
+    public static void main(String[] args) {
+
+        // Tạo danh sách tour
+        TourLinkedList tourList = new TourLinkedList();
+
+        // Tạo các địa điểm
+        TourLocation hcm = new TourLocation("HCM", "Ho Chi Minh", "Sai Gon", 0);
+        TourLocation dn  = new TourLocation("DN", "Da Nang", "Bien dep", 500);
+        TourLocation hue = new TourLocation("HUE", "Hue", "Co do", 300);
+        TourLocation ha  = new TourLocation("HA", "Hoi An", "Pho co", 400);
+
+        System.out.println("=== TRAVEL PLANNER DEMO ===");
+
+        // 1. Add Last
+        tourList.addLast(hcm);
+        tourList.addLast(dn);
+        System.out.println("1. Sau khi addLast HCM, DN:");
+        System.out.println(tourList.print());
+
+        // 2. Add First
+        tourList.addFirst(hue);
+        System.out.println("2. Sau khi addFirst Hue:");
+        System.out.println(tourList.print());
+
+        // 3. Insert After
+        tourList.insertAfter("DN", ha);
+        System.out.println("3. Chen Hoi An sau Da Nang:");
+        System.out.println(tourList.print());
+
+        // 4. Remove by ID
+        tourList.removeById("HCM");
+        System.out.println("4. Xoa HCM:");
+        System.out.println(tourList.print());
+
+        // 5. Size
+        System.out.println("5. So luong dia diem: " + tourList.size());
+    }
+}
+
+▶️ Cách chạy trong VS Code (JDK 21)
+Cách 1: Nút Run
+
+Mở App.java
+
+Bấm Run ▶ trên VS Code
+
+Cách 2: CMD (đúng kiểu môn học)
+javac -d out src/com/travelplanner/**/*.java
+java -cp out com.travelplanner.app.App
+
+✅ Output mong đợi (đại khái)
+=== TRAVEL PLANNER DEMO ===
+1. Sau khi addLast HCM, DN:
+Ho Chi Minh -> Da Nang -> END
+2. Sau khi addFirst Hue:
+Hue -> Ho Chi Minh -> Da Nang -> END
+3. Chen Hoi An sau Da Nang:
+Hue -> Ho Chi Minh -> Da Nang -> Hoi An -> END
+4. Xoa HCM:
+Hue -> Da Nang -> Hoi An -> END
+5. So luong dia diem: 3
+
+🧾 Commit gợi ý (commit tiếp theo)
+Add App class to demonstrate TourLinkedList operations
+
+
+👉 Giờ bạn copy nguyên đoạn code này, chạy thử.
+Chạy được rồi gửi mình, mình sẽ chia cho bạn tiếp các commit nhỏ cho đủ 10 commit (mỗi commit rất hợp lý, không bị “dồn code” nha).
