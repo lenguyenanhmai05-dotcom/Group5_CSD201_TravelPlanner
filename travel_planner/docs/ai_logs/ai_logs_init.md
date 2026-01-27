@@ -685,3 +685,384 @@ Nếu bạn muốn, mình có thể:
 
 Không có tệp nào được chọnKhông có tệp nào được chọn
 ChatGPT có thể mắc lỗi. Hãy kiểm tra các thông tin quan trọng. Vui lòng tham khảo Tùy chọn cookie.
+
+Chuyển đến nội dung
+Lịch sử đoạn chat
+
+
+
+Bạn đã nói:
+HƯỚNG DẪN TRIỂN KHAI DỰ ÁN MÔN HỌC (PROJECT GUIDELINES)
+Môn học: CSD201 - Data Structures and Algorithms
+Hình thức: Project-Based Learning (PBL) kết hợp AI-Assisted Coding
+Thời lượng: 10 tuần
+1. GIỚI THIỆU CHUNG & TRIẾT LÝ MỚI
+Thay vì làm các bài tập rời rạc, môn CSD201 kỳ này sẽ được triển khai theo hình thức Dự án xuyên suốt (Capstone Project). Mục tiêu không chỉ là học thuật toán, mà là xây dựng một ứng dụng hoàn chỉnh mô phỏng thực tế.
+Điểm mới: Sử dụng AI (ChatGPT, Copilot, Claude...)
+Được phép: Sinh viên ĐƯỢC KHUYẾN KHÍCH sử dụng AI để generate code, tối ưu thuật toán, debug.
+Vai trò: Hãy coi AI là một "Junior Developer" chăm chỉ nhưng hay mắc lỗi. Các bạn là "Tech Lead/Architect".
+Trách nhiệm: Các bạn phải chịu trách nhiệm hoàn toàn về tính đúng đắn của code. Code chạy sai do AI viết -> Nhóm nhận 0 điểm.
+Yêu cầu ghi nhật ký (AI Interaction Log):
+Bắt buộc nộp kèm Lịch sử làm việc với AI (dạng file PDF export từ ChatGPT/Claude hoặc Link share session) trong mỗi bài Assignment.
+Nội dung log phải thể hiện được: Câu hỏi (Prompt) của bạn, Code AI trả về, và cách bạn yêu cầu AI sửa lỗi.
+Mục đích: Giảng viên sẽ chấm điểm dựa trên cách đặt câu hỏi (Prompt Engineering) và tư duy phản biện của sinh viên khi AI trả lời sai.
+2. CẤU TRÚC NHÓM & CÔNG CỤ (TEAM & TOOLS)
+Số lượng: 02 sinh viên/nhóm (Pair Programming).
+Phân vai (khuyến khích luân phiên):
+Driver: Người trực tiếp tương tác với AI, gõ code, chạy thử.
+Navigator: Người rà soát code (Code Review), viết Unit Test, đảm bảo code xử lý được các trường hợp biên (Edge cases).
+Quản lý mã nguồn (Source Control - BẮT BUỘC):
+Tất cả source code phải được lưu trữ trên GitHub.
+Quy định Commit:
+Phải có lịch sử commit liên tục (tối thiểu 10 commits/thành viên cho mỗi giai đoạn).
+Commit message phải rõ ràng (Ví dụ: Feat: Add BST delete function, Fix: NullPointer in Queue, tránh dùng Update code, Fix bug).
+Đánh giá đóng góp: Giảng viên sẽ kiểm tra GitHub Insights để xác định ai là người làm thật. Nếu chỉ một người commit -> Người còn lại nhận 0 điểm.
+3. DANH SÁCH ĐỀ TÀI (PROJECT THEMES)
+Các nhóm chọn 1 trong 5 đề tài dưới đây.
+Theme 1: Travel Planner (Hệ thống Quản lý Tour & Bản đồ)
+Mô tả: Ứng dụng hỗ trợ đặt tour du lịch và tìm đường đi.
+Yêu cầu kỹ thuật:
+Hành trình Tour (Linked List): Lưu danh sách địa điểm tham quan. Yêu cầu tính năng thêm/xóa địa điểm bất kỳ trong tour.
+Dữ liệu Khách hàng (BST): Quản lý thông tin khách đặt vé bằng cây nhị phân tìm kiếm (theo ID hoặc Tên).
+Bản đồ (Graph): Tìm đường đi ngắn nhất giữa 2 thành phố (Dijkstra).
+4. LỘ TRÌNH TRIỂN KHAI & ĐÁNH GIÁ (ROADMAP)
+Tổng điểm Project chiếm 40% trọng số môn học (bao gồm các cột Progress Test và Assignment).
+Giai đoạn 1: Khởi tạo & Cấu trúc Tuyến tính (Tuần 1 - 3)
+Nhiệm vụ:
+Tạo GitHub Repository, mời giảng viên vào làm Collaborator.
+Xây dựng Class cơ bản (Node, Product/User/Item...).
+Implement module 1 của đề tài: Linked List / Stack / Queue.
+BẮT BUỘC: Viết bộ Unit Test (bằng JUnit hoặc code main test thủ công) để chứng minh code AI viết không bị lỗi NullPointerException.
+Đánh giá (Lấy điểm Progress Test 1 - 10%): Chấm dựa trên độ phủ của Test case và lịch sử commit trên GitHub.
+Giai đoạn 2: Cấu trúc Cây & Hiệu năng (Tuần 4 - 6)
+Nhiệm vụ:
+Implement module 2: Binary Search Tree (BST).
+Chuyển đổi cấu trúc dữ liệu từ List sang Tree để tối ưu tìm kiếm.
+Báo cáo so sánh: Đo thời gian chạy (Benchmark) tìm kiếm trên 10.000 phần tử giữa List và BST.
+Đánh giá (Lấy điểm Assignment 1 - 10%): Chấm dựa trên báo cáo phân tích hiệu năng, AI Log và sự hiểu biết về đệ quy.
+Giai đoạn 3: Đồ thị & Thuật toán (Tuần 7 - 9)
+Nhiệm vụ:
+Implement module 3: Graph.
+Xây dựng thuật toán tìm đường (Dijkstra/BFS) hoặc duyệt đồ thị.
+Đọc dữ liệu bản đồ/đồ thị từ file text (File I/O).
+Đánh giá (Lấy điểm Progress Test 2 - 10%): Code Challenge tại lớp. Giảng viên sẽ yêu cầu sinh viên giải thích luồng chạy của thuật toán Graph mà nhóm đã implement.
+Giai đoạn 4: Hoàn thiện & Bảo vệ (Tuần 10)
+Nhiệm vụ: Tích hợp UI (bắt buộc), làm sạch code, viết báo cáo tổng kết.
+Đánh giá (Lấy điểm Assignment 2 - 10%):
+Demo sản phẩm chạy mượt mà.
+Vấn đáp: Trả lời các câu hỏi về việc tối ưu hóa code và sửa lỗi logic của AI.
+5. LƯU Ý QUAN TRỌNG VỀ THI CỬ (EXAM PREP)
+Mặc dù Project được dùng AI, nhưng kỳ thi thực hành (Practical Exam - 30%) và lý thuyết (Final Exam - 30%) sẽ diễn ra trong môi trường KHÔNG CÓ AI.
+Để không bị "gãy" khi đi thi, các nhóm phải tuân thủ quy tắc "Trust but Verify":
+Với mỗi hàm AI viết (ví dụ: deleteNode, balanceTree, Dijkstra), từng thành viên phải tự gõ lại (re-type) và giải thích được từng dòng.
+Các cấu trúc dữ liệu trong Project (Linked List, BST) phải được xây dựng thủ công (Custom implementation), KHÔNG dùng thư viện có sẵn của Java (java.util.LinkedList, java.util.TreeMap...) trừ khi có sự cho phép đặc biệt ở các module phụ.
+bạn giải thích dùm mình tất tần tật những gì mình cần phải làm trong project này đi ạ 
+ChatGPT đã nói:
+Ok, mình giải thích từ A → Z, theo kiểu “đọc xong là biết phải làm gì, làm theo thứ tự nào”, không sót thứ gì hết nha.
+Bạn cứ tưởng tượng đây là bản đồ sinh tồn cho CSD201 😄
+
+1️⃣ BẢN CHẤT CỦA PROJECT NÀY LÀ GÌ?
+🎯 Mục tiêu thật sự
+Không phải:
+
+Học thuộc thuật toán
+
+Chép code cho chạy
+
+Mà là:
+
+Xây dựng 1 ứng dụng hoàn chỉnh
+
+Biết dùng AI nhưng không bị AI dắt mũi
+
+Hiểu rõ từng dòng code (vì đi thi KHÔNG CÓ AI)
+
+👉 AI = Junior Dev
+👉 Bạn = Tech Lead (AI sai → bạn chịu trách nhiệm)
+
+⚠️ Cực kỳ quan trọng
+
+Code do AI viết mà sai → 0 điểm nguyên nhóm
+
+2️⃣ BẮT BUỘC PHẢI LÀM NGAY TỪ ĐẦU
+👥 Nhóm
+2 người / nhóm
+
+Pair Programming
+
+Vai trò (nên luân phiên):
+Driver
+
+Gõ code
+
+Hỏi AI
+
+Chạy chương trình
+
+Navigator
+
+Review code
+
+Nghĩ test case
+
+Bắt lỗi logic, edge case
+
+➡️ Nếu 1 người làm hết → người kia 0 điểm
+
+🌐 GitHub (BẮT BUỘC – không có là coi như rớt)
+Bạn phải:
+
+Tạo 1 GitHub repository
+
+Add giảng viên làm Collaborator
+
+Code TẤT CẢ đều nằm trên GitHub
+
+Quy định commit
+Mỗi người ≥ 10 commits / giai đoạn
+
+Commit message rõ ràng:
+
+✅ ĐÚNG:
+
+Feat: Add linked list insert at position
+Fix: Handle null when deleting node in BST
+Test: Add edge cases for empty list
+❌ SAI:
+
+update code
+fix bug
+final
+👉 Giảng viên sẽ soi GitHub Insights
+👉 Ai không commit = 0 điểm
+
+3️⃣ ĐỀ TÀI BẠN ĐANG LÀM (THEME 1 – TRAVEL PLANNER)
+Mình phân rã đúng theo yêu cầu môn:
+
+🧩 MODULE 1 – LINKED LIST (Tour)
+Bạn phải làm gì?
+Tự code Linked List thủ công
+
+KHÔNG dùng java.util.LinkedList
+
+Ứng dụng:
+Mỗi node = 1 địa điểm du lịch
+
+Tour = danh sách các địa điểm
+
+Chức năng BẮT BUỘC:
+Thêm địa điểm:
+
+Đầu danh sách
+
+Cuối danh sách
+
+Vị trí bất kỳ
+
+Xóa địa điểm:
+
+Theo tên / ID
+
+Theo vị trí
+
+Duyệt và in tour
+
+📌 Trọng tâm chấm điểm
+
+Xử lý:
+
+List rỗng
+
+Xóa node đầu/cuối
+
+Vị trí không tồn tại
+
+KHÔNG bị NullPointerException
+
+🧪 UNIT TEST (CỰC KỲ QUAN TRỌNG)
+Ở mỗi module, bạn PHẢI:
+
+Viết test (JUnit hoặc main test thủ công)
+
+Chứng minh:
+
+Không crash
+
+Không NullPointer
+
+Ví dụ test:
+
+Xóa khi list rỗng
+
+Thêm rồi xóa node duy nhất
+
+Xóa vị trí > size
+
+👉 Test càng nhiều → điểm càng cao
+
+4️⃣ MODULE 2 – BST (Khách hàng)
+🌳 BST dùng để làm gì?
+Quản lý khách hàng đặt tour
+
+Tối ưu tìm kiếm
+
+Bạn phải tự implement:
+Node
+
+Insert
+
+Search
+
+Delete (cái này rất hay hỏi thi)
+
+❌ KHÔNG dùng:
+
+TreeMap
+
+TreeSet
+
+Yêu cầu nâng cao:
+So sánh hiệu năng:
+
+List vs BST
+
+10.000 phần tử
+
+Đo thời gian tìm kiếm
+
+📄 Phải có báo cáo:
+
+Code benchmark
+
+Kết quả
+
+Nhận xét: vì sao BST nhanh hơn / chậm hơn
+
+5️⃣ MODULE 3 – GRAPH (Bản đồ)
+Bạn phải làm:
+Tự cài đặt Graph
+
+Adjacency List hoặc Matrix
+
+Đọc dữ liệu từ file .txt
+
+Thuật toán:
+Dijkstra (ưu tiên)
+
+Hoặc BFS (nếu đơn giản)
+
+BẮT BUỘC:
+Giải thích được:
+
+Vì sao chọn node này
+
+Vì sao update distance
+
+Luồng chạy thuật toán
+
+⚠️ Progress Test 2
+
+Thầy hỏi miệng:
+
+“Thuật toán Graph nhóm em chạy như thế nào?”
+
+👉 Không hiểu là toang
+
+6️⃣ AI – DÙNG SAO CHO ĐÚNG?
+Được phép:
+Hỏi AI viết code
+
+Debug
+
+Tối ưu
+
+Nhưng BẮT BUỘC:
+Lưu AI Interaction Log
+
+📄 Log phải có:
+
+Prompt bạn hỏi
+
+Code AI trả về
+
+Bạn phát hiện lỗi gì
+
+Bạn hỏi AI sửa như thế nào
+
+👉 Thầy chấm:
+
+Cách bạn đặt câu hỏi
+
+Cách bạn phản biện AI
+
+7️⃣ UI (TUẦN CUỐI – BẮT BUỘC)
+Không cần đẹp, nhưng phải:
+
+Chạy được
+
+Có menu
+
+Gọi được các module:
+
+Tour (Linked List)
+
+Customer (BST)
+
+Map (Graph)
+
+👉 Console UI cũng được (menu số)
+
+8️⃣ THI CUỐI KỲ – CẠM BẪY NGUY HIỂM ⚠️
+❌ KHÔNG CÓ AI
+❌ KHÔNG TRA GOOGLE
+
+👉 Bạn phải:
+
+Tự viết lại code
+
+Giải thích từng dòng
+
+📌 Vì vậy:
+
+Mỗi hàm AI viết → tự gõ lại
+
+Hiểu:
+
+Vì sao dùng vòng lặp
+
+Vì sao dùng đệ quy
+
+Vì sao cần điều kiện dừng
+
+9️⃣ TÓM GỌN: CHECKLIST SỐNG CÒN ✅
+Mỗi nhóm phải có:
+ GitHub repo + commit đều
+
+ Linked List custom + test
+
+ BST custom + benchmark
+
+ Graph + thuật toán
+
+ File I/O
+
+ AI Log PDF / link
+
+ UI chạy được
+
+ Mỗi thành viên hiểu toàn bộ code
+
+Nếu bạn muốn, mình có thể:
+
+🔹 Lập sơ đồ thư mục chuẩn
+
+🔹 Gợi ý phân chia task cho 2 người
+
+🔹 Viết prompt mẫu hỏi AI cho từng module
+
+🔹 Giả lập câu hỏi vấn đáp của giảng viên
+
+👉 Bạn muốn mình làm phần nào trước?
+
+Không có tệp nào được chọnKhông có tệp nào được chọn
+ChatGPT có thể mắc lỗi. Hãy kiểm tra các thông tin quan trọng. Vui lòng tham khảo Tùy chọn cookie.

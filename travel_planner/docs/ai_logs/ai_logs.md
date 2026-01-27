@@ -653,7 +653,6 @@ public class TourLinkedListTest {
         assertEquals("END", list.print());
     }
 }
-Cách "chém gió" trong báo cáo để bài làm có chiều sâu
 Khi nộp bài hoặc thuyết trình, em giải thích cấu trúc file test này như sau (đảm bảo thầy cô gật gù):
 
 Tính độc lập (Isolation): Em sử dụng @BeforeEach để khởi tạo lại danh sách mới cho mỗi bài test. Điều này đảm bảo test case này không bị ảnh hưởng bởi dữ liệu rác của test case trước đó (tránh lỗi dây chuyền).
