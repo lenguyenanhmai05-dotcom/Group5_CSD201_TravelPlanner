@@ -90,3 +90,72 @@ Bạn xem qua kế hoạch này nhé. Nếu bạn đồng ý với hướng đi 
 
 Implementation Plan
 Open
+
+
+Hoàn thành xuất sắc Giai đoạn 2 rồi nhé!
+
+Mình đã code xong module BST (Binary Search Tree) và chạy Benchmark (đo hiệu năng) so sánh với List. Kết quả cực kỳ ấn tượng (đúng như lý thuyết mình chém gió lúc nãy):
+
+📊 Kết quả Benchmark (Trên 10,000 khách hàng)
+Cấu trúc	Thời gian tìm kiếm	Nhận xét
+ArrayList	~398.7 ms	Phải dò từng người một (Chậm)
+B.S. Tree	~1.5 ms	Nhảy cóc tìm cực nhanh (Nhanh gấp ~265 lần)
+Như vậy là bạn đã có đầy đủ bằng chứng để báo cáo Assignment 1.
+
+Những file mình đã tạp/sửa:
+
+Customer.java: Model lưu thông tin khách.
+Node.java: Node của cây.
+BinarySearchTree.java: Cấu trúc cây (có Insert, Search, InOrder).
+BenchmarkApp.java: File chạy test để ra kết quả trên.
+Bạn có thể xem chi tiết trong file walkthrough.md bên dưới để lấy nội dung làm báo cáo. Bạn muốn mình làm gì tiếp theo? (Ví dụ: Thêm tính năng xoá khách hàng, hay chuẩn bị chuyển sang Giai đoạn 3?)
+
+Walkthrough
+Open
+thầy mới nói là có delete ạ bạn làm delete cho mình chưa 
+
+Thought for 3s
+
+
+
+
+Implementing BST Delete
+Implemented 
+delete
+, 
+deleteRec
+, and 
+minValue
+ methods in 
+BinarySearchTree.java
+ to handle node removal with all three structural cases covered.
+
+Files Edited
+BinarySearchTree.java
+Progress Updates
+1
+Reading BinarySearchTree.java to confirm current state before adding delete logic.
+
+2
+Appending delete and deleteRec methods to BinarySearchTree.java.
+
+3
+Notifying user about the completion of delete implementation and explaining the logic.
+
+Xong luôn! Mình đã bổ sung hàm delete vào class BinarySearchTree rồi nhé.
+
+Đây là đoạn code mình vừa thêm, và giải thích nhanh cách nó hoạt động (khá thú vị):
+
+Logic xoá Node trong BST (3 trường hợp)
+Node là "lá" (Không có con):
+Xoá cái một -> Target = null. (Ví dụ xoá số 80, cắt đứt là xong).
+Node có 1 con (Con trái hoặc Con phải):
+Lấy đứa con đó "thế chỗ" cha nó ngay lập tức. (Ví dụ xoá số 70, mà 70 có con là 60 -> đưa 60 lên vị trí của 70).
+Node có đủ 2 con (Ca khó nhất):
+Ví dụ muốn xoá Root (50). Không thể cứ thế mà xoá vì cây sẽ gãy đôi.
+Giải pháp: Tìm "Người kế vị" (In-order Successor).
+Quy tắc: Tìm node nhỏ nhất của nhánh bên phải. (Ví dụ trong nhánh phải của 50 có [60, 55, 70], thì 55 là nhỏ nhất).
+Copy giá trị 55 lên thế chỗ 50. Sau đó xoá node 55 cũ đi.
+Code đã nằm trong file BinarySearchTree.java. Bạn có muốn mình viết thêm 1 cái test case nhỏ để thử tính năng xoá này không?
+
+BinarySearchTree.java
