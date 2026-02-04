@@ -159,3 +159,52 @@ Copy giá trị 55 lên thế chỗ 50. Sau đó xoá node 55 cũ đi.
 Code đã nằm trong file BinarySearchTree.java. Bạn có muốn mình viết thêm 1 cái test case nhỏ để thử tính năng xoá này không?
 
 BinarySearchTree.java
+
+Giai đoạn 1: Khởi tạo & Cấu trúc Tuyến tính (Tuần 1 - 3)
+Nhiệm vụ:
+Tạo GitHub Repository, mời giảng viên vào làm Collaborator.
+Xây dựng Class cơ bản (Node, Product/User/Item...).
+Implement module 1 của đề tài: Linked List / Stack / Queue.
+BẮT BUỘC: Viết bộ Unit Test (bằng JUnit hoặc code main test thủ công) để chứng minh code AI viết không bị lỗi NullPointerException.
+Đánh giá (Lấy điểm Progress Test 1 - 10%): Chấm dựa trên độ phủ của Test case và lịch sử commit trên GitHub.
+Giai đoạn 2: Cấu trúc Cây & Hiệu năng (Tuần 4 - 6)
+Nhiệm vụ:
+Implement module 2: Binary Search Tree (BST).
+Chuyển đổi cấu trúc dữ liệu từ List sang Tree để tối ưu tìm kiếm.
+Báo cáo so sánh: Đo thời gian chạy (Benchmark) tìm kiếm trên 10.000 phần tử giữa List và BST.
+Đánh giá (Lấy điểm Assignment 1 - 10%): Chấm dựa trên báo cáo phân tích hiệu năng, AI Log và sự hiểu biết về đệ quy.
+
+hôm bữa mik làm giai đoạn 1 r  giờ bạn mik mới code giai đoạn 2 bạn mik làm code còn mik làm test bạn xem dùm tôi mik test giai đoạn 2 là test những gì thảo luận thôi ch viết code test nha
+
+Thought for 1s
+
+
+Analyzed
+c:\Travelplanner
+Analyzed
+c:\Travelplanner\Group5_CSD201_TravelPlanner
+Analyzed
+c:\Travelplanner\Group5_CSD201_TravelPlanner\travel_planner
+Analyzed
+c:\Travelplanner\Group5_CSD201_TravelPlanner\travel_planner\src
+Analyzed
+c:\Travelplanner\Group5_CSD201_TravelPlanner\travel_planner\src\main\java
+
+Thought for <1s
+
+
+Researching Project and Phase 2 Requirements
+I've analyzed the codebase and found the Phase 1 implementation (Linked List) and Phase 2 implementation (BST and Benchmark App). I've identified that the BST unit tests are missing, which aligns with the user's role as the tester. I'm now ready to discuss the specific test cases and strategy for Phase 2.
+
+Files Edited
+Task
+Progress Updates
+1
+Exploring Phase 1 and Phase 2 implementation progress
+
+2
+Updating task list and preparing discussion points
+
+3
+Notifying user for discussion
+
