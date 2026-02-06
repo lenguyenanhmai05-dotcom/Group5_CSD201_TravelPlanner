@@ -13,8 +13,8 @@ public class BenchmarkApp {
     public static void main(String[] args) {
         System.out.println("=== BENCHMARK: LINKED LIST (JAVA LIST) vs BINARY SEARCH TREE ===");
 
-        int DATABOX_SIZE = 10000;
-        int SEARCH_TEST_COUNT = 1000;
+        int DATABOX_SIZE = 100000;
+        int SEARCH_TEST_COUNT = 100000;
 
         // 1. Generate Data
         System.out.println("Generating " + DATABOX_SIZE + " customer records...");

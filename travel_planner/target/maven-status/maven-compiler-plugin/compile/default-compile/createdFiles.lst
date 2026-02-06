@@ -1,4 +1,8 @@
 com\travelplanner\app\App.class
 com\travelplanner\structures\LocationNode.class
-com\travelplanner\structures\TourLinkedList.class
+com\travelplanner\structures\BinarySearchTree.class
+com\travelplanner\structures\Node.class
+com\travelplanner\entities\Customer.class
 com\travelplanner\entities\TourLocation.class
+com\travelplanner\structures\TourLinkedList.class
+com\travelplanner\app\BenchmarkApp.class

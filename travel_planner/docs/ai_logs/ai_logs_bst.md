@@ -208,3 +208,30 @@ Updating task list and preparing discussion points
 3
 Notifying user for discussion
 
+
+ # # #   C ­p   n h ­t   G i a i   o ¡n   2 :   K i Ãm   t h í  &   H i Çu   n n g   ( 0 4 / 0 2 / 2 0 2 6 ) 
+ 
+ # # # #   1 .   K ¿t   q u £  B e n c h m a r k   ( 1 0 , 0 0 0   K h á c h   h à n g ) 
+ -   * * A r r a y L i s t   ( D ò   t ì m   t u y ¿n   t í n h ) : * *   ~ 7 3 2 . 8 5   m s 
+ -   * * B i n a r y   S e a r c h   T r e e   ( T ì m   k i ¿m   n h Ë  p h â n ) : * *   ~ 3 . 0 5   m s 
+ -   * * K ¿t   l u ­n : * *   B S T   n h a n h   h ¡n   * * 2 4 0 . 0 4   l §n * * .   C ¥u   t r ú c   c â y   g i ú p   g i £m   Ù  p h éc   t ¡p   t ë  ( n ) $   x u Ñn g   ( \ l o g   n ) $ ,   c ñc   k ó  h i Çu   q u £  c h o   d ï  l i Çu   l Ûn . 
+ 
+ # # # #   2 .   K ¿t   q u £  U n i t   T e s t   ( J U n i t   5 ) 
+ M ì n h   ã   t r i Ãn   k h a i   b Ù  T e s t   \ B i n a r y S e a r c h T r e e T e s t . j a v a \   v Ûi   8   t r °Ýn g   h ãp   k i Ãm   t h í  q u a n   t r Ín g : 
+ -   \ 	 e s t S e a r c h I n E m p t y T r e e \ :   £m   b £o   k h ô n g   l ×i   N P E   k h i   c â y   r ×n g . 
+ -   \ 	 e s t I n s e r t A n d S e a r c h \ :   K i Ãm   t r a   t í n h   ú n g   ¯n   c ça   d ï  l i Çu . 
+ -   \ 	 e s t I n s e r t D u p l i c a t e \ :   X í  l ý   t r ù n g   l ·p . 
+ -   \ 	 e s t D e l e t e L e a f N o d e \ :   X o á   n ú t   l á . 
+ -   \ 	 e s t D e l e t e N o d e W i t h O n e C h i l d \ :   X o á   n ú t   c ó   1   c o n . 
+ -   \ 	 e s t D e l e t e N o d e W i t h T w o C h i l d r e n \ :   X o á   n ú t   c ó   2   c o n   ( T ì m   I n - o r d e r   S u c c e s s o r ) . 
+ -   \ 	 e s t D e l e t e N o n E x i s t e n t \ :   £m   b £o   k h ô n g   c r a s h   k h i   x o á   I D   k h ô n g   c ó   t h ­t . 
+ -   \ 	 e s t I n O r d e r T r a v e r s a l \ :   K i Ãm   t r a   c ¥u   t r ú c   p h â n   c ¥p . 
+ 
+ * * K ¿t   q u £  c h ¡y   T e s t : * * 
+ -   * * T e s t s   r u n : * *   8 
+ -   * * F a i l u r e s : * *   0 
+ -   * * E r r o r s : * *   0 
+ -   * * T i m e   e l a p s e d : * *   0 . 0 7 7   s 
+ 
+ M Íi   y ê u   c §u   v Á  t í n h   ú n g   ¯n   v à   a n   t o à n   ( K h ô n g   l ×i   N u l l P o i n t e r E x c e p t i o n )   c ça   G i a i   o ¡n   2   ã   h o à n   t ¥t !  
+ 

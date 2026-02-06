@@ -1,17 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.travelplanner.structures.TourLinkedListTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.086 s <<< FAILURE! -- in com.travelplanner.structures.TourLinkedListTest
-com.travelplanner.structures.TourLinkedListTest.testAddFirst -- Time elapsed: 0.009 s <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <B -> A -> C ->END> but was: <B -> A -> END>
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1141)
-	at com.travelplanner.structures.TourLinkedListTest.testAddFirst(TourLinkedListTest.java:27)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.travelplanner.structures.TourLinkedListTest
