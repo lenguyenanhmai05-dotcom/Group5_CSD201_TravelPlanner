@@ -36,7 +36,7 @@ public class BenchmarkApp {
         Collections.shuffle(dataPool);
 
         // 2. Setup Structures
-        List<Customer> linearList = new ArrayList<>(); // Represents the linear structure approach
+        List<Customer> linearList = new java.util.LinkedList<>(); // Changed to LinkedList as requested
         BinarySearchTree bst = new BinarySearchTree();
 
         System.out.println("Inserting data into structures...");
@@ -57,7 +57,7 @@ public class BenchmarkApp {
         }
 
         // 4. Benchmark Linear Search (List)
-        System.out.println("\n>> Running Linear Search on ArrayList (" + SEARCH_TEST_COUNT + " searches)...");
+        System.out.println("\n>> Running Linear Search on LinkedList (" + SEARCH_TEST_COUNT + " searches)...");
         long startList = System.nanoTime();
 
         int foundList = 0;
