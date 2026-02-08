@@ -253,3 +253,12 @@ Test tìm kiếm (Search)
 Test trùng lặp
 Test xoá Node (đủ 3 trường hợp: xoá lá, xoá 1 con, xoá 2 con)
 Vậy là Giai đoạn 2 của bạn coi như hoàn thành 100% (Cả code, cả test, và cả báo cáo hiệu năng). Bạn có cần mình làm gì nữa không?
+ # # #   P h a s e   2   R e s e a r c h   &   A n a l y s i s   ( S t a r t   o f   W e e k   4 ) 
+ -   * * G o a l * * :   I m p l e m e n t   B i n a r y   S e a r c h   T r e e   ( B S T )   t o   o p t i m i z e   s e a r c h   o p e r a t i o n s . 
+ -   * * A n a l y s i s * * : 
+     -   C u r r e n t   s t r u c t u r e :   L i n k e d   L i s t   ( S e a r c h   t i m e   O ( n ) ) . 
+     -   T a r g e t   s t r u c t u r e :   B S T   ( S e a r c h   t i m e   O ( l o g   n ) ) . 
+     -   R e q u i r e d   M o d e l s :   \ C u s t o m e r \   ( n e e d s   t o   i m p l e m e n t   \ C o m p a r a b l e \   f o r   s o r t i n g   b y   I D ) . 
+     -   R e q u i r e d   S t r u c t u r e :   \ B i n a r y S e a r c h T r e e \   c l a s s   w i t h   \ i n s e r t \ ,   \ s e a r c h \ ,   \ d e l e t e \ . 
+  
+ 
