@@ -285,3 +285,13 @@ Vậy là Giai đoạn 2 của bạn coi như hoàn thành 100% (Cả code, cả
      -   * * R e s u l t * * :   A l l   8   t e s t s   p a s s e d   s u c c e s s f u l l y . 
   
  
+ # # #   P e r f o r m a n c e   B e n c h m a r k   &   O p t i m i z a t i o n   ( F i n a l ) 
+ -   * * T o o l * * :   \ B e n c h m a r k A p p . j a v a \ 
+ -   * * D a t a s e t * * :   1 0 , 0 0 0   r a n d o m i z e d   C u s t o m e r s . 
+ -   * * C o m p a r i s o n * * : 
+     -   * * A r r a y L i s t / L i n k e d L i s t   ( L i n e a r   S e a r c h ) * * :   ~ 2 2 9   m s   ( O ( n ) ) 
+     -   * * B S T   ( B i n a r y   S e a r c h ) * * :   ~ 1 . 7 9   m s   ( O ( l o g   n ) ) 
+     -   * * O p t i m i z a t i o n * * :   S w i t c h e d   b e n c h m a r k   b a s e l i n e   f r o m   A r r a y L i s t   t o   L i n k e d L i s t   a s   p e r   i n s t r u c t o r   r e q u e s t . 
+     -   * * C o n c l u s i o n * * :   B S T   i s   a p p r o x i m a t e l y   * * 1 2 7 x   -   2 4 0 x   f a s t e r * * . 
+  
+ 
