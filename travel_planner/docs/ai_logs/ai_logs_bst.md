@@ -262,3 +262,14 @@ Vậy là Giai đoạn 2 của bạn coi như hoàn thành 100% (Cả code, cả
      -   R e q u i r e d   S t r u c t u r e :   \ B i n a r y S e a r c h T r e e \   c l a s s   w i t h   \ i n s e r t \ ,   \ s e a r c h \ ,   \ d e l e t e \ . 
   
  
+ # # #   B S T   I m p l e m e n t a t i o n   ( W e e k   4 - 5 ) 
+ -   * * C o m p l e t e d * * : 
+     -   C r e a t e d   \ c o m . t r a v e l p l a n n e r . s t r u c t u r e s . B i n a r y S e a r c h T r e e \ . 
+     -   I m p l e m e n t e d   c o r e   m e t h o d s : 
+         -   \ i n s e r t ( C u s t o m e r   c ) \ :   R e c u r s i v e   p l a c e m e n t   b a s e d   o n   I D   c o m p a r i s o n . 
+         -   \ s e a r c h ( S t r i n g   i d ) \ :   R e c u r s i v e   s e a r c h   r e t u r n i n g   \ C u s t o m e r \   o r   \ 
+ u l l \ . 
+         -   \ d e l e t e ( S t r i n g   i d ) \ :   H a n d l i n g   3   c a s e s   ( L e a f ,   1   C h i l d ,   2   C h i l d r e n   w i t h   I n - o r d e r   S u c c e s s o r ) . 
+     -   \ i n O r d e r T r a v e r s a l ( ) \ :   P r i n t i n g   c u s t o m e r s   s o r t e d   b y   I D . 
+  
+ 
