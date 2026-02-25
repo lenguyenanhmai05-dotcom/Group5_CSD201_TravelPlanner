@@ -1,4 +1,5 @@
 com\travelplanner\app\App.class
+com\travelplanner\structures\graph\Location.class
 com\travelplanner\structures\LocationNode.class
 com\travelplanner\structures\BinarySearchTree.class
 com\travelplanner\structures\Node.class
