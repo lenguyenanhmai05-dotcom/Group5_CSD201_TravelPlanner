@@ -1,0 +1,5 @@
+Quy Nhon;Chi Thanh;60.0
+Quy Nhon;Song Cau;20.0
+Song Cau;Chi Thanh;30.0
+Chi Thanh;Tuy Hoa;40.0
+Song Cau;Tuy Hoa;100.0
