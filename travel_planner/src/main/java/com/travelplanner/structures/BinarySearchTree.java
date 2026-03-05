@@ -15,13 +15,11 @@ public class BinarySearchTree {
     }
 
     private Node insertRec(Node root, Customer customer) {
-        // Base case: if tree is empty, return new node
         if (root == null) {
             root = new Node(customer);
             return root;
         }
 
-        // Recursion down the tree
         // Compare IDs: if customer ID < root ID -> goes Left
         if (customer.compareTo(root.info) < 0) {
             root.left = insertRec(root.left, customer);
@@ -36,10 +34,6 @@ public class BinarySearchTree {
 
     // 2. Search (Recursion)
     public Customer search(String id) {
-        // Create a dummy customer object just to use the ID for comparison
-        // or we can manually compare IDs.
-        // For strictness, let's manually compare in the helper or use a dummy.
-        // A helper method that takes String ID is often cleaner.
         Node result = searchRec(root, id);
         if (result != null) {
             return result.info;
@@ -48,7 +42,6 @@ public class BinarySearchTree {
     }
 
     private Node searchRec(Node root, String id) {
-        // Base Cases: root is null or key is present at root
         if (root == null || root.info.getId().equals(id)) {
             return root;
         }
@@ -95,20 +88,23 @@ public class BinarySearchTree {
     }
 
     private Node deleteRec(Node root, String id) {
-        // Base case: If tree is empty
         if (root == null) {
             return root;
         }
 
-        // Recurse down the tree
+        // Found the node to be deleted
         if (id.compareTo(root.info.getId()) < 0) {
             root.left = deleteRec(root.left, id);
         } else if (id.compareTo(root.info.getId()) > 0) {
             root.right = deleteRec(root.right, id);
         } else {
-            // Found the node to be deleted
 
-            // Case 1 & 2: Node with only one child or no child
+            // Case 1: Node with NO child (Leaf Node)
+            if (root.left == null && root.right == null) {
+                return null;
+            }
+
+            // Case 2: Node with exactly ONE child
             if (root.left == null) {
                 return root.right;
             } else if (root.right == null) {
