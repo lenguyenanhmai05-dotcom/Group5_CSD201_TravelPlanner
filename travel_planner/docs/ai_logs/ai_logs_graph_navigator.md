@@ -88,3 +88,54 @@ Tưởng tượng: Bạn đi lạc vào trong một cái Cung Điện Mê Cung (
 Hoạt động: Đi một mạch xuống tuốt tận lá của sơ đồ Tree/Graph. Đụng đường cụt mới quay đầu lùi lại 1 bậc (hành động này gọi là Backtrack - Quay lui) để rẽ thử đường khác.
 Dùng cái gì để code: Stack (Ngăn Xếp/Đệ quy). Xoắn tít vào trong rồi lại nhả từ từ ngược ra ngoài.
 
+bạn mình đã làm phần graph rồi ấy ạ bạn xem dùm mình giải tthíchcode cho mình bạn mình làm gì đi ạ chỗ structure graph đó ạ 
+Về yêu cầu đánh giá cấu trúc mã nguồn do bạn Driver (Lập trình viên chính) triển khai, dưới đây là bản phân tích học thuật chi tiết về 3 tệp tin 
+
+Location.java
+, 
+
+Edge.java
+ và 
+
+Graph.java
+ để hỗ trợ bạn hoàn thành nhiệm vụ Navigator (Chỉ đạo & Thuyết trình):
+
+Phân tích Kiến trúc Đồ thị (Graph Architecture Analysis)
+Mô hình hiện tại đang được xây dựng dựa trên lý thuyết Cấu trúc dữ liệu Đồ thị (Graph Data Structure) nhằm mô phỏng mạng lưới giao thông.
+
+1. Lớp 
+
+Location.java
+ (Đại diện cho Nút/Đỉnh - Vertex/Node)
+Chức năng: Đóng vai trò là một Đỉnh (Vertex) trong đồ thị.
+Trường dữ liệu (Fields): Bao gồm định danh id (như "SGN", "HAN") và tên định danh name (như "Ho Chi Minh"). Khai báo ở dạng tối giản (Minimalist approach).
+Tính đóng gói (Encapsulation): Các trường dữ liệu được đánh dấu private và cung cấp các phương thức Getter chuẩn mực nhằm bảo vệ dữ liệu.
+2. Lớp 
+
+Edge.java
+ (Đại diện cho Cạnh liên kết - Edge)
+Chức năng: Trừu tượng hóa tuyến đường kết nối giữa hai Đỉnh. Đây là cấu trúc cơ sở để liên kết các 
+
+Location
+ lại với nhau.
+Trường dữ liệu:
+destinationId: Tham chiếu định danh của Đỉnh đích.
+weight (Kiểu double): Là Trọng số của cạnh (khoảng cách hoặc thời gian). Giá trị này là biến số cốt lõi để các thuật toán định tuyến như Dijkstra tiến hành đánh giá và tìm đường đi tối ưu (Shortest Path).
+3. Lớp 
+
+Graph.java
+ (Controller chính của Kiến trúc)
+Đoạn mã mã này thể hiện sự nắm vững nguyên lý thiết kế Đồ thị, cụ thể thông qua 2 biến thể hiện quan trọng nhất tại (Dòng 14, 15):
+
+Map<String, Location> locations; (Bảng băm Đỉnh): Lưu trữ và duy trì cấu trúc tra cứu nhanh $O(1)$ cho toàn bộ danh sách các Đỉnh trên bản đồ thông qua khóa xác định id.
+Map<String, List<Edge>> adjList; (Danh sách kề - Adjacency List): Đây là ưu điểm thiết kế lớn nhất.
+Khi Giảng viên chất vấn về phương pháp lưu trữ Graph: Bạn (Navigator) cần khẳng định mạnh mẽ: "Dạ, nhóm sử dụng Danh sách kề (Adjacency List) làm kỹ thuật lưu trữ chính vì mạng lưới giao thông thực tế thường là Đồ thị thưa (Sparse Graph). Việc lưu trữ bằng Ma trận kề (Adjacency Matrix) $V \times V$ sẽ gây lãng phí nghiêm trọng tài nguyên bộ nhớ đệm (RAM)."
+Tính chất Đồ thị: Ở phương thức 
+
+addEdge
+ (Dòng 33, 34), Driver đã áp dụng logic đăng ký Cạnh đồng thời cho cả chiềều đi và về: adjList.get(destinationId).add(...). Điều này cho thấy đây là mô hình Đồ thị Vô hướng (Undirected Graph), phản ánh chính xác bài toán đường bộ hai chiều cơ bản.
+
+Nhìn chung, cấu trúc nền tảng mà bạn Driver xây dựng có tính hệ thống cao và hoàn toàn tuân thủ các nguyên lý SOLID. Bước tiếp theo, bản thân mình đề nghị bạn tập trung vào việc xây dựng tệp dữ liệu kiểm thử (Test Data) để truyền vào phương thức 
+
+loadFromFile()
+. Bạn có cần hỗ trợ thiết lập kịch bản Data Test này không ạ?
