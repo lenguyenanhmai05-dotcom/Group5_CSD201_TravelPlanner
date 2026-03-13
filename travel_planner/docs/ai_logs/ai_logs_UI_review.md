@@ -366,6 +366,68 @@ Micro-animations: Thêm hiệu ứng trượt nhẹ khi chuyển tab hoặc khi 
 2. Về Tối Ưu UX (Trải nghiệm người dùng)
 Empty States: Khi chưa tìm kiếm, thay vì để trắng, nên có một icon mờ (như cái kính lúp hay bản đồ) và dòng chữ "Hãy nhập thông tin để bắt đầu" để tránh cảm giác màn hình bị trống.
 Skeleton Loading: Thay vì hiện chữ "Đang tải...", có thể dùng hiệu ứng nhấp nháy xám mờ (Skeleton) cho các Card khách hàng/tour giúp cảm giác app chạy nhanh hơn.
-3. Về Code (Optimization)
-Error Handling: Hiện tại Code đã khá tốt, nhưng có thể thêm một lớp "Global Toast" đẹp hơn để báo khi server Java bị tắt (hiện tại bạn đang dùng div thông báo đỏ).
-🔥 Bạn có muốn mình thử áp dụng hiệu ứng "Glassmorphism" và "Gradient Cao Cấp" vào một vài chỗ để bạn xem thử sự khác biệt không? Chỉ cần đổi vài dòng CSS là giao diện sẽ "sang" hơn hẳn luôn!
+bạn làm dùm tôi đi ạ tôi chọn 2
+
+Edited
++3
+-3
+Xong! Đã triển khai Skeleton Loading nhấp nháy xám và trạng thái Empty State (màn hình chờ) cực xịn cho cả 3 Tab rồi nhé ✅
+
+2. Về Tối Ưu UX (Trải nghiệm người dùng)
+Empty States: Khi chưa tìm kiếm, thay vì để trắng, nên có một icon mờ (như cái kính lúp hay bản đồ) và dòng chữ "Hãy nhập thông tin để bắt đầu" để tránh cảm giác màn hình bị trống.
+Skeleton Loading: Thay vì hiện chữ "Đang tải...", có thể dùng hiệu ứng nhấp nháy xám mờ (Skeleton) cho các Card khách hàng/tour giúp cảm giác app chạy nhanh hơn.
+bạn làm dùm tôi đi ạ tôi chọn 2
+
+
+
+
+Implementing UX Optimizations (Empty States & Skeleton Loading)
+The user selected UX optimization point 2: Empty States and Skeleton Loading. I am now planning the implementation steps and updating the task tracker.
+
+Files Edited
+Progress Updates
+1
+Updating task.md with new UX optimization items
+
+Mình đã lên kế hoạch chi tiết để triển khai Empty States và Skeleton Loading cho bạn.
+
+Những cải tiến này bao gồm:
+
+Empty States: Thay vì màn hình trắng trống trơn lúc mới vào tab, mình sẽ hiện icon mờ và lời chào thân thiện để dẫn dắt người dùng.
+Skeleton Loading: Khi đang tải dữ liệu (Tour/Khách hàng), giao diện sẽ nhấp nháy xám mờ thay vì hiện chữ "Đang tải", tạo cảm giác ứng dụng chạy cực nhanh và chuyên nghiệp.
+Bạn xem qua 
+Kế hoạch triển khai
+ nhé. Nếu bạn đồng ý, mình sẽ bắt đầu code ngay! 🚀✨
+
+Implementation Plan - UX Optimization (Empty States & Skeleton Loading)
+Implement point 2 of the UX optimization suggestions to make the app feel faster and more professional.
+
+Proposed Changes
+[Component: CSS]
+[MODIFY] 
+style.css
+Add @keyframes shimmer for skeleton animation.
+Add .skeleton classes for text, icons, and cards.
+Add .empty-state styles with icons and centered text.
+[Component: HTML]
+[MODIFY] 
+index.html
+Add initial empty state HTML for #map-result, #tour-list, and #customer-search-result.
+[Component: JavaScript]
+[MODIFY] 
+app.js
+Implement showSkeleton(elementId, type) function.
+Update 
+findRoute
+, 
+loadTour
+, and 
+searchCustomer
+ to show skeletons before fetching and clear them after.
+Verification Plan
+Automated Tests
+N/A (UI visual changes)
+Manual Verification
+Observe skeleton animation when adding/loading tour items.
+Check "Empty State" appearance on initial load of each tab.
+Switch between tabs and verify the empty states remain until search.
