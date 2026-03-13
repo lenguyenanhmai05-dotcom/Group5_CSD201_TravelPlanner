@@ -338,7 +338,7 @@ async function loadTour() {
                         <div class="tour-item-name">${stop.name}</div>
                         <div class="tour-item-desc">${stop.description || 'Không có mô tả'}</div>
                     </div>
-                    <span class="tour-item-price">${stop.price > 0 ? stop.price + 'K₫' : 'Free'}</span>
+                    <span class="tour-item-price">${stop.price > 0 ? stop.price + 'K' : 'Free'}</span>
                     <button class="btn btn-danger" onclick="removeTourStop('${stop.id}', '${stop.name}')">✕</button>
                 </div>
             `;
