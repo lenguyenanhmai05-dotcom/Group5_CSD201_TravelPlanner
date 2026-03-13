@@ -96,29 +96,47 @@ body {
 /* ─── Tab Nav ────────────────────────────────────────────── */
 .tab-nav {
     display: flex;
-    gap: 8px;
+    justify-content: center;  /* Căn giữa 3 mục */
+    gap: 12px;
     background: #ffffff;
     border-bottom: 2px solid var(--border);
     padding: 0 32px;
-    max-width: 100%;
-    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
 }
 
 .tab-btn {
     background: none;
     border: none;
     color: var(--text-muted);
-    padding: 20px 24px;
+    padding: 18px 28px;
     cursor: pointer;
     font-size: 0.95rem;
     font-weight: 600;
     font-family: 'Inter', sans-serif;
     border-bottom: 3px solid transparent;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     white-space: nowrap;
     display: flex;
     align-items: center;
     gap: 10px;
+    position: relative;
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 35%;
+    height: 30%;
+    width: 1px;
+    background: var(--border);
+}
+
+.tab-btn:last-child::after {
+    display: none;
 }
 
 .tab-btn:hover {
