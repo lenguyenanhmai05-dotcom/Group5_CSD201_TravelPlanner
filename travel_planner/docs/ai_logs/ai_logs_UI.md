@@ -77,3 +77,72 @@ Giây 0.35: Đường vẽ đến Sông Cầu
 Giây 0.7: Đường vẽ tiếp đến Chí Thạnh
 Giây 1.05: Đường vẽ hoàn chỉnh tới Tuy Hòa ✅
 Thực tế vì bản đồ Leaflet chỉ có 4 điểm nên animation xảy ra hơi nhanh (chưa đến 2 giây). Nếu muốn thấy rõ hơn thì mình đổi từ 350 thành 700 hoặc 1000 (1 giây/đoạn) là thấy rõ mồn một. Bạn muốn chỉnh không ạ?
+
+
+À mình hiểu vấn đề rồi! Đường đỏ BFS bị đường xanh Dijkstra che mất — vì trong code, đường xanh Dijkstra được vẽ đè lên trên đường đỏ BFS. Với những tuyến dài như Huế → Nha Trang, 2 đường đi qua cùng segment nên nhìn chỉ thấy màu xanh.
+
+Cách fix: vẽ BFS sau khi animation Dijkstra xong, để BFS nằm trên cùng:
+
+Analyzed
+Edited
++26
+-16
+Now also need to remove the old legend update block that's now duplicated in the old location. Let me also remove the old legend lines from the bottom of 
+
+drawRouteOnMap
+:
+
+Analyzed
+Edited
++0
+-7
+Ran command
+…\travel_planner > mvn process-resources -q
+Exit code 0
+Xong rồi bạn! Ctrl+Shift+R để hard-refresh nhé.
+
+Cách hoạt động mới:
+
+Đường xanh Dijkstra vẽ animation trước (chạy từng đoạn từ Bắc xuống Nam)
+Khi animation xong → đường đỏ BFS nét đứt vẽ đè lên trên cùng → bây giờ sẽ thấy rõ đường đỏ ở những đoạn BFS đi khác Dijkstra (ví dụ đoạn Sông Cầu → Tuy Hòa thẳng vs Sông Cầu → Chí Thạnh → Tuy Hòa)
+Với tuyến Quy Nhơn → Tuy Hòa: sẽ thấy đường đỏ đi thẳng Sông Cầu → Tuy Hòa, còn đường xanh vòng qua Chí Thạnh rõ ràng nhất. Còn các tuyến dài như Huế → Nha Trang thì đường đỏ cũng hiện rõ ở đoạn phân nhánh đó!
+
+thêm từ quy nhơn đến tây sơn i ạ 
+
+
+
+
+
+
+Tây Sơn (Bình Định) cách Quy Nhơn khoảng 50km ngược vào trong đất liền. Mình thêm vào cả 3 chỗ luôn:
+
+Adding Tay Son City to Map
+Successfully added Tây Sơn to all 3 places: 
+
+map_test.txt
+ (Quy Nhon;Tay Son;50km edge), 
+
+app.js
+ CITY_COORDS (GPS 13.9544, 108.9889), and 
+
+app.js
+ GRAPH_ADJ. Server restarted cleanly with new data loaded.
+
+Files Edited
+Progress Updates
+1
+Adding Tay Son to map_test.txt, CITY_COORDS, and GRAPH_ADJ then refreshing resources
+
+2
+Editing CITY_COORDS and GRAPH_ADJ in app.js to add Tay Son, then refreshing resources
+
+3
+Notifying user that Tay Son has been added and server successfully restarted
+
+Xong rồi! Tây Sơn đã được thêm vào bản đồ, server đã khởi động lại với dữ liệu mới ✅
+
+Những gì đã thêm:
+
+map_test.txt: Quy Nhon ↔ Tay Son = 50km
+Bản đồ Leaflet: tọa độ GPS Tây Sơn [13.9544, 108.9889] (huyện Tây Sơn, Bình Định — nằm về phía Tây Quy Nhơn, vùng đất lịch sử nhà Tây Sơn)
+Ctrl+Shift+R trên trình duyệt rồi thử tìm đường Quy Nhon → Tay Son là thấy ngay nhé! Bạn muốn thêm địa điểm nào nữa không?
