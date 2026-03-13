@@ -96,9 +96,9 @@ body {
 /* ─── Tab Nav ────────────────────────────────────────────── */
 .tab-nav {
     display: flex;
-    gap: 0;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
+    gap: 8px;
+    background: #ffffff;
+    border-bottom: 2px solid var(--border);
     padding: 0 32px;
     max-width: 100%;
     overflow-x: auto;
@@ -108,30 +108,27 @@ body {
     background: none;
     border: none;
     color: var(--text-muted);
-    padding: 16px 24px;
+    padding: 20px 24px;
     cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 0.95rem;
+    font-weight: 600;
     font-family: 'Inter', sans-serif;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 
 .tab-btn:hover {
-    color: var(--text);
+    color: var(--accent);
+    background: #fff8fb;
 }
 
 .tab-btn.active {
     color: var(--accent);
     border-bottom-color: var(--accent);
-}
-
-.tab-btn span {
-    font-size: 1.1rem;
 }
 
 /* ─── Content ────────────────────────────────────────────── */
@@ -270,7 +267,7 @@ body {
 
 .btn-success:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(52, 211, 153, 0.4);
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
 }
 
 .btn-danger {
@@ -328,17 +325,17 @@ body {
 }
 
 .result-success {
-    background: rgba(52, 211, 153, 0.1);
-    border: 1px solid rgba(52, 211, 153, 0.3);
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
     border-radius: var(--radius);
-    padding: 20px;
+    padding: 24px;
 }
 
 .result-error {
-    background: rgba(248, 113, 113, 0.1);
-    border: 1px solid rgba(248, 113, 113, 0.3);
+    background: #fef2f2;
+    border: 1px solid #fecaca;
     border-radius: var(--radius);
-    padding: 20px;
+    padding: 24px;
     color: var(--danger);
 }
 
@@ -379,19 +376,22 @@ body {
 }
 
 .tour-item {
-    background: var(--surface2);
+    background: #ffffff;
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
+    border-radius: 12px;
+    padding: 20px;
     display: flex;
     align-items: center;
     gap: 16px;
-    transition: border-color 0.2s;
-    animation: fadeIn 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeIn 0.4s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .tour-item:hover {
-    border-color: var(--accent2);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
 }
 
 .tour-item-icon {
@@ -496,13 +496,14 @@ body {
 }
 
 .city-node {
-    background: var(--surface2);
+    background: #ffffff;
     border: 2px solid var(--accent);
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-size: 0.85rem;
-    font-weight: 500;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 0.88rem;
+    font-weight: 600;
     color: var(--accent);
+    box-shadow: 0 4px 6px rgba(255,107,157,0.1);
 }
 
 .edge-label {
@@ -590,17 +591,17 @@ body {
     z-index: 1;
 }
 
-/* Leaflet popup dark style */
+/* Leaflet popup clean light style */
 .leaflet-popup-content-wrapper {
-    background: var(--surface2);
+    background: #ffffff;
     color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    box-shadow: var(--shadow);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 .leaflet-popup-tip {
-    background: var(--surface2);
+    background: #ffffff;
 }
 
 .leaflet-popup-content {
