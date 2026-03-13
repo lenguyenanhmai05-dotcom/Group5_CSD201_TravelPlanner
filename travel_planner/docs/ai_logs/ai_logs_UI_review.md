@@ -270,3 +270,44 @@ Edited
 
 Bạn refresh trình duyệt (Ctrl + Shift + R) là thấy ngay — không cần restart server vì đây là file tĩnh (JavaScript). 🎉
 
+sao mình thấy cái màu hồng nó hơi bị chói, kiểu mà màu trắng  vs màu hồng nó hơi sáng quá bạn xem dùm mình nói cho mình biết nên chỉnh thành màu gì cho thích hợp ạ
+
+Để tư vấn đúng, mình coi 
+
+style.css
+ trước:
+
+Analyzed
+
+
+
+
+Mình đã đọc 
+
+style.css
+ xong. Vấn đề là 2 màu accent đang quá tươi và bảo hòa:
+
+css
+--accent:  #ff6b9d;  /* Hồng neon — CHÓi */
+--accent2: #fb7185;  /* Hồng đỏ — cũng CHÓi */
+Dưới đây là 3 hướng chỉnh tùy theo gu của bạn:
+
+🎨 Option 1 — Dusty Rose (hồng trầm, sang trọng nhất)
+css
+--accent:  #b5687e;   /* Hồng đất - muted, không chói */
+--accent2: #c97d91;   /* Hồng phấn trầm */
+--border:  #e8d0d8;   /* Viền xám hồng nhẹ */
+🎨 Option 2 — Mauve Pink (hồng tím nhạt, trendy)
+css
+--accent:  #a56b8a;   /* Hồng tím - hơi sang */
+--accent2: #c084a0;   /* Mauve sáng hơn */
+--border:  #e2ccd8;   /* Viền tím hồng */
+🎨 Option 3 — Warm Blush (hồng kem nhẹ, dễ nhìn nhất)
+css
+--accent:  #d4748f;   /* Hồng kem - vừa đủ nổi, không chói */
+--accent2: #e8909f;   /* Hồng nhạt hơn */
+--border:  #f2dde3;   /* Viền gần như không thấy */
+💡 Gợi ý của mình: Dùng Option 1 (Dusty Rose) — màu #b5687e nhìn chuyên nghiệp, phù hợp với nền trắng, không bị "sến" hay chói mắt. Bạn chọn cái nào thì mình sửa code vào 
+
+style.css
+ cho?
