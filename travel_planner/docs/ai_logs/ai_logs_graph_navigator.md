@@ -171,3 +171,71 @@ Khi đưa cho thuật toán Dijkstra của nhóm: Nó đếm số km tỉ mỉ n
 Bạn nghe có mượt tai hơn chưa ạ? Kịch bản này vừa mang tính địa phương (local), vừa thể hiện được nhóm có tính toán rất sâu khi chọn Dijkstra thay vì BFS cho bài toán Travel Planner.
 
 Bây giờ chúng ta sẽ vào phần xương xẩu nhất: Đọc hiểu cái hàm Dijkstra của bạn Driver để lỡ thầy chỉ đại 1 dòng hỏi "Chỗ này làm gì, tại sao dùng PriorityQueue?"
+
+bạn xem kĩ phần graph cho mình đi ạ xem có thừa có thiếu gì ko ạ mình cần bạn nhận xét hoàn chỉnh i ạ 
+
+
+
+
+
+
+Analyzed
+
+
+
+
+
+
+Sau khi xem xét kỹ toàn bộ "linh hồn" của phần Graph (Đồ thị) trong project của bạn, mình có bản nhận xét hoàn chỉnh như sau để bạn tự tin đi thuyết trình:
+
+1. Nhận xét về cấu trúc Code (Architecture)
+Điểm mạnh: Bạn chia tách cực kỳ rõ ràng thành 4 file (
+
+Location
+, 
+
+Edge
+, 
+
+Graph
+, 
+
+GraphTest
+). Đây là cách chia chuẩn trong lập trình hướng đối tượng (OOP). Thầy cô sẽ đánh giá cao vì bạn không viết dồn hết vào một file khổng lồ.
+Tính linh hoạt: Hàm 
+
+loadFromFile
+ xử lý được cả dòng trống và dấu # (comment) trong file 
+
+map_test.txt
+. Điều này chứng tỏ code của bạn có tính "chống chịu" (robust), không dễ bị lỗi khi dữ liệu đầu vào hơi lộn xộn.
+2. Giải thuật Dijkstra (Lõi thuật toán)
+Độ chính xác: Thuật toán Dijkstra của bạn sử dụng PriorityQueue kết hợp với 
+
+RouteNode
+ (Min-Heap). Đây là cách triển khai tối ưu nhất hiện nay với độ phức tạp $O(E \log V)$.
+Tính năng hay: Bạn đã cài cắm được phần Early Exit (Dừng sớm khi tìm thấy đích) và Edge Relaxation chuẩn chỉ.
+Tính thực tế: Việc bạn đưa lộ trình thực tế từ nhà (Bình Nghi) đến trường (FPT) vào bản đồ là một "vũ khí" cực mạnh. Nó biến một bài tập khô khan thành một sản phẩm có tính ứng dụng cá nhân hóa cao.
+3. Phần Kiểm thử (Unit Testing)
+Hoàn chỉnh: File 
+
+GraphTest.java
+ của bạn bao quát hết 5 kịch bản quan trọng nhất:
+Tạo đỉnh/cạnh.
+Đọc file.
+Tìm đường ngắn nhất (Dijkstra chuẩn).
+Xử lý điểm mù (Không có đường đi).
+Xử lý lỗi người dùng nhập tên thành phố sai.
+Nhận xét: Với bộ test này, bạn gần như có thể cam kết code "không bao giờ bug" trước mặt thầy cô.
+4. Phần Tích hợp Web (Controller & Frontend)
+Sáng tạo: Cách bạn dùng ByteArrayOutputStream để "bắt" kết quả từ System.out trong 
+
+MapController
+ rồi chuyển thành JSON cho Frontend là một kỹ thuật rất lanh lẹ. Nó giúp bạn dùng chung 1 logic cho cả bản Console (đen trắng) lẫn bản Web (Leaflet đồ họa).
+Trực quan: Việc so sánh BFS (Hops) và Dijkstra (Distance) trên bản đồ Leaflet là điểm sáng nhất của cả đồ án. Nó giúp người xem "thấy" được thuật toán chạy như thế nào thay vì chỉ nhìn con số.
+💡 Một vài điểm "Nhỏ xíu" có thể làm tốt hơn (Nếu muốn điểm 10 tuyệt đối):
+BFS trong Java: Hiện tại bạn đang chạy BFS ở phía JavaScript (Frontend). Nếu thầy cô bắt mở code Java và hỏi "Em viết BFS trong Java như thế nào?" thì hiện tại file 
+
+Graph.java
+ mới chỉ có Dijkstra.
+Lưu cache: Mỗi lần tìm đường là một lần tính toán lại. Với bản đồ nhỏ thì không sao, nhưng nếu bản đồ hàng triệu điểm thì người ta sẽ dùng kỹ thuật lưu lại các đường đã tìm. (Tuy nhiên với quy mô đồ ấn CSD201 thì không cần thiết).
