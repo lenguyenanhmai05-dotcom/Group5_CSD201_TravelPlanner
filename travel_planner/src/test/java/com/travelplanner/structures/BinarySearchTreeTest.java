@@ -36,7 +36,7 @@ public class BinarySearchTreeTest {
     @Test
     void testInsertDuplicate() {
         bst.insert(new Customer("C01", "An", "0123"));
-        bst.insert(new Customer("D01", "An Duplicate", "0123"));
+        bst.insert(new Customer("C01", "An Duplicate", "0123"));
 
         // Count should remain 1 if your BST handles duplicates by ignoring them
         // or we check the info isn't overwritten if that's the logic.
