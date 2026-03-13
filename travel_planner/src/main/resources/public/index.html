@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Planner — Group 5</title>
+    <meta name="description"
+        content="CSD201 Travel Planner — Hệ thống quản lý tour du lịch sử dụng Linked List, BST và Graph/Dijkstra">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">✈️</span>
+                    <div>
+                        <h1>Travel Planner</h1>
+                        <p class="logo-sub">CSD201 — Group 5 — Data Structures & Algorithms</p>
+                    </div>
+                </div>
+                <div class="badges">
+                    <span class="badge">Linked List</span>
+                    <span class="badge">BST</span>
+                    <span class="badge">Graph (Dijkstra)</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('map')" id="tab-map">
+                <span>🗺️</span> Tìm Đường (Graph)
+            </button>
+            <button class="tab-btn" onclick="switchTab('tour')" id="tab-tour">
+                <span>📅</span> Lịch Trình (Linked List)
+            </button>
+            <button class="tab-btn" onclick="switchTab('customer')" id="tab-customer">
+                <span>👤</span> Khách Hàng (BST)
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+
+            <!-- ═══════════════════════════════════════════════════ -->
+            <!-- TAB 1: Map / Graph / Dijkstra                       -->
+            <!-- ═══════════════════════════════════════════════════ -->
+            <section id="panel-map" class="panel active">
+                <div class="panel-header">
+                    <h2>🗺️ Tìm Đường Ngắn Nhất</h2>
+                    <p>Thuật toán Dijkstra — đường đi ngắn nhất giữa 2 thành phố</p>
+                </div>
+
+                <div class="card">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Điểm xuất phát</label>
+                            <input type="text" id="map-start" placeholder="VD: Quy Nhon" />
+                        </div>
+                        <div class="arrow-divider">→</div>
+                        <div class="form-group">
+                            <label>Điểm đến</label>
+                            <input type="text" id="map-end" placeholder="VD: Tuy Hoa" />
+                        </div>
+                        <button class="btn btn-primary" onclick="findRoute()">Tìm đường</button>
+                    </div>
+
+                    <div class="quick-routes" style="margin-bottom: 8px;">
+                        <span class="quick-label">Tuyến đường địa phương: </span>
+                        <button class="chip" style="background-color: #3b82f6; color: white" onclick="quickRoute('Nha Minh','Dai Hoc FPT')">Nhà Mình (Bình Nghi) → ĐH FPT</button>
+                    </div>
+                    <div class="quick-routes">
+                        <span class="quick-label">Tuyến Bắc - Nam:</span>
+                        <button class="chip" onclick="quickRoute('Hue','Nha Trang')">Huế → Nha Trang</button>
+                        <button class="chip" onclick="quickRoute('Da Nang','Tuy Hoa')">Đà Nẵng → Tuy Hòa</button>
+                        <button class="chip" onclick="quickRoute('Quy Nhon','Tuy Hoa')">Quy Nhơn → Tuy Hòa</button>
+                        <button class="chip" onclick="quickRoute('Hue','Quy Nhon')">Huế → Quy Nhơn</button>
+                        <button class="chip" onclick="quickRoute('Hoi An','Nha Trang')">Hội An → Nha Trang</button>
+                    </div>
+                </div>
+
+                <div id="map-result" class="result-area hidden"></div>
+
+                <div id="leaflet-map-container" class="hidden">
+                    <div class="card" style="padding:16px">
+                        <h3 style="margin-bottom:12px">🌍 Bản đồ lộ trình</h3>
+                        <div id="leaflet-map"></div>
+                        <!-- Legend -->
+                        <div id="map-legend"
+                            style="display:none;margin-top:14px;gap:20px;flex-wrap:wrap;align-items:center">
+                            <div style="display:flex;align-items:center;gap:8px">
+                                <div
+                                    style="width:32px;height:4px;background:#f87171;border-radius:2px;border:1px dashed #f87171">
+                                </div>
+                                <span id="legend-bfs-dist" style="font-size:0.8rem;color:#f87171"></span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:8px">
+                                <div style="width:32px;height:4px;background:#4f8ef7;border-radius:2px"></div>
+                                <span id="legend-dijk-dist" style="font-size:0.8rem;color:#4f8ef7"></span>
+                            </div>
+                            <span style="font-size:0.78rem;color:#8892aa">💡 Hover lên đường đỏ để xem chi tiết BFS. Bấm
+                                vào marker xanh để xem khoảng cách.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box" id="dynamic-info-box" style="display: none;">
+                    <h4>📖 Chi tiết từng chặng đường</h4>
+                    <div class="map-viz" id="dynamic-map-viz">
+                        <!-- Dynamic content filled by JS -->
+                    </div>
+                    <p class="hint" id="dynamic-map-hint"></p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════ -->
+            <!-- TAB 2: Tour / Linked List                           -->
+            <!-- ═══════════════════════════════════════════════════ -->
+            <section id="panel-tour" class="panel">
+                <div class="panel-header">
+                    <h2>📅 Lịch Trình Tour Du Lịch</h2>
+                    <p>Cấu trúc Linked List — Thêm/Xóa địa điểm tham quan</p>
+                </div>
+
+                <div class="card">
+                    <h3>Thêm Địa Điểm Mới</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input type="text" id="tour-id" placeholder="VD: EG" />
+                        </div>
+                        <div class="form-group">
+                            <label>Tên địa điểm</label>
+                            <input type="text" id="tour-name" placeholder="VD: Eo Gió" />
+                        </div>
+                        <div class="form-group">
+                            <label>Mô tả</label>
+                            <input type="text" id="tour-desc" placeholder="VD: Cung đường ven biển đẹp" />
+                        </div>
+                        <div class="form-group">
+                            <label>Giá (VND nghìn)</label>
+                            <input type="number" id="tour-price" placeholder="VD: 80" />
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="addTourStop()">+ Thêm vào lịch trình</button>
+                </div>
+
+                <div class="card">
+                    <h3>Lịch Trình Hiện Tại</h3>
+                    <div id="tour-list" class="tour-list">
+                        <div class="loading">Đang tải...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════ -->
+            <!-- TAB 3: Customer / BST                               -->
+            <!-- ═══════════════════════════════════════════════════ -->
+            <section id="panel-customer" class="panel">
+                <div class="panel-header">
+                    <h2>👤 Quản Lý Khách Hàng</h2>
+                    <p>Cấu trúc Binary Search Tree — Tìm kiếm O(log n)</p>
+                </div>
+
+                <div class="two-col">
+                    <!-- Search -->
+                    <div class="card">
+                        <h3>🔍 Tìm Kiếm Khách Hàng (BST)</h3>
+                        <div class="form-group">
+                            <label>Nhập ID khách hàng</label>
+                            <input type="text" id="customer-search-id" placeholder="VD: C001" />
+                        </div>
+                        <button class="btn btn-primary" onclick="searchCustomer()">Tìm kiếm</button>
+                        <div class="quick-routes" style="margin-top:12px">
+                            <span class="quick-label">Thử ID:</span>
+                            <button class="chip" onclick="quickSearch('C001')">C001</button>
+                            <button class="chip" onclick="quickSearch('C003')">C003</button>
+                            <button class="chip" onclick="quickSearch('C005')">C005</button>
+                        </div>
+                        <div id="customer-search-result" class="result-area hidden" style="margin-top:16px"></div>
+                    </div>
+
+                    <!-- Add -->
+                    <div class="card">
+                        <h3>➕ Thêm Khách Hàng Mới</h3>
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input type="text" id="cust-id" placeholder="VD: C006" />
+                        </div>
+                        <div class="form-group">
+                            <label>Họ tên</label>
+                            <input type="text" id="cust-name" placeholder="VD: Nguyen Thi Mai" />
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input type="text" id="cust-phone" placeholder="VD: 0901234567" />
+                        </div>
+                        <button class="btn btn-success" onclick="addCustomer()">Thêm vào BST</button>
+                        <div id="customer-add-result" class="result-area hidden" style="margin-top:16px"></div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>🌳 Cây BST Khách Hàng (Dữ liệu mẫu)</h4>
+                    <div class="bst-viz">
+                        <div class="bst-level">
+                            <span class="bst-node root">C003</span>
+                        </div>
+                        <div class="bst-level">
+                            <span class="bst-node">C001</span>
+                            <span class="bst-node">C005</span>
+                        </div>
+                        <div class="bst-level">
+                            <span class="bst-node leaf">—</span>
+                            <span class="bst-node leaf">C002</span>
+                            <span class="bst-node leaf">C004</span>
+                            <span class="bst-node leaf">—</span>
+                        </div>
+                    </div>
+                    <p class="hint">💡 BST sắp xếp theo ID. Tìm C005: So sánh tại C003 → phải → C005. Chỉ 2 bước!</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
