@@ -267,8 +267,6 @@ Giao diện Web đã chạy thành công 100% tại http://localhost:8080! 🎉
 
 
 
-
-
 Tóm tắt những gì đã xây dựng:
 
 Module	API	Giao diện	Kết quả
