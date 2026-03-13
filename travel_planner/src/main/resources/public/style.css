@@ -635,6 +635,60 @@ body {
     font-size: 0.9rem;
 }
 
+
+/* ─── Skeleton Loading ────────────────────────────────────── */
+.skeleton {
+    background: #f1f5f9;
+    background: linear-gradient(110deg, #f1f5f9 8%, #f8fafc 18%, #f1f5f9 33%);
+    border-radius: 8px;
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position-left: -200%;
+    }
+}
+
+.skeleton-text {
+    height: 14px;
+    margin-bottom: 8px;
+    width: 80%;
+}
+
+.skeleton-title {
+    height: 20px;
+    margin-bottom: 12px;
+    width: 50%;
+}
+
+.skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* ─── Empty State ────────────────────────────────────────── */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    opacity: 0.3;
+    display: block;
+}
+
+.empty-state p {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -645,4 +699,4 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-}
+}
