@@ -83,6 +83,48 @@ function calcPathDistance(path) {
     return total;
 }
 
+// ─── UI Helper Functions ──────────────────────────────────────────────────────
+function showSkeleton(elementId, type = 'list') {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    
+    let html = '';
+    if (type === 'list') {
+        for (let i = 0; i < 3; i++) {
+            html += `
+                <div class="tour-item skeleton" style="opacity: 0.7">
+                    <div class="skeleton-avatar" style="background: #e2e8f0"></div>
+                    <div class="tour-item-info">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-text"></div>
+                    </div>
+                </div>
+            `;
+            if (i < 2) html += '<div class="tour-connector" style="opacity:0.2">↓</div>';
+        }
+    } else if (type === 'card') {
+        html = `
+            <div class="customer-card skeleton" style="opacity: 0.7; height: 80px">
+                <div class="skeleton-avatar" style="background: #e2e8f0"></div>
+                <div style="flex:1">
+                    <div class="skeleton skeleton-title"></div>
+                    <div class="skeleton skeleton-text" style="width: 40%"></div>
+                </div>
+            </div>
+        `;
+    } else if (type === 'map') {
+        html = `
+            <div class="result-success skeleton" style="opacity: 0.7; height: 120px">
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text" style="width: 60%"></div>
+            </div>
+        `;
+    }
+    el.innerHTML = html;
+    el.classList.remove('hidden');
+}
+
 // ─── Leaflet map state ────────────────────────────────────────────────────────
 let leafletMap = null;
 let dijkstraLayer = null;
@@ -246,18 +288,19 @@ function quickRoute(start, end) {
 async function findRoute() {
     const start = document.getElementById('map-start').value.trim();
     const end = document.getElementById('map-end').value.trim();
+    const resultEl = document.getElementById('map-result');
+    const mapVizContainer = document.getElementById('leaflet-map-container');
+
     if (!start || !end) {
         showResult('map-result', '⚠️ Vui lòng nhập cả điểm xuất phát và điểm đến.', true);
         return;
     }
 
-    const resultEl = document.getElementById('map-result');
-    resultEl.className = 'result-area';
-    resultEl.innerHTML = '<div class="loading">🔍 Đang chạy thuật toán Dijkstra...</div>';
-
     try {
+        showSkeleton('map-result', 'map');
+        mapVizContainer.classList.add('hidden');
+        
         const res = await fetch(`${BASE}/api/map/route?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`);
-        const data = await res.json();
 
         if (!res.ok) {
             showResult('map-result', `❌ ${data.error}`, true);
@@ -265,6 +308,7 @@ async function findRoute() {
             return;
         }
 
+        const data = await res.json();
         const stepsHtml = data.steps.map((city, i) =>
             (i > 0 ? '<span class="route-arrow">→</span>' : '') +
             `<span class="route-city">${city}</span>`
@@ -318,13 +362,22 @@ async function findRoute() {
 
 async function loadTour() {
     const listEl = document.getElementById('tour-list');
-    listEl.innerHTML = '<div class="loading">Đang tải dữ liệu Linked List...</div>';
     try {
+        // Only show skeleton if list isn't already loaded or we want explicit refresh
+        if (listEl.innerHTML.includes('empty-state') || listEl.innerHTML === '') {
+            showSkeleton('tour-list', 'list');
+        }
+        
         const res = await fetch(`${BASE}/api/tour`);
         const stops = await res.json();
 
         if (!stops || stops.length === 0) {
-            listEl.innerHTML = '<div class="loading">Lịch trình trống. Hãy thêm địa điểm!</div>';
+            listEl.innerHTML = `
+                <div class="empty-state">
+                    <span class="empty-state-icon">📅</span>
+                    <p>Lịch trình đang trống. Hãy thêm địa điểm mới ở trên!</p>
+                </div>
+            `;
             return;
         }
 
@@ -405,13 +458,15 @@ function quickSearch(id) {
 
 async function searchCustomer() {
     const id = document.getElementById('customer-search-id').value.trim();
-    if (!id) { alert('Vui lòng nhập ID khách hàng!'); return; }
-
     const resultEl = document.getElementById('customer-search-result');
-    resultEl.className = 'result-area';
-    resultEl.innerHTML = '<div class="loading">🌳 Đang duyệt cây BST...</div>';
+
+    if (!id) {
+        showResult('customer-search-result', '⚠️ Vui lòng nhập ID khách hàng!', true);
+        return;
+    }
 
     try {
+        showSkeleton('customer-search-result', 'card');
         const res = await fetch(`${BASE}/api/customer/${encodeURIComponent(id)}`);
         const data = await res.json();
 
