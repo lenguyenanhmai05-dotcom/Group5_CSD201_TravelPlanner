@@ -46,3 +46,34 @@ mvn exec:java "-Dexec.mainClass=com.travelplanner.app.WebApp"
 Rồi mở trình duyệt vào http://localhost:8080
 
 Bạn muốn mình push code lên GitHub luôn không, hay có cần chỉnh thêm gì cho giao diện không ạ?
+
+Xong cả 3 tính năng luôn! 🎉
+
+
+Tất cả 3 tính năng đều hoạt động:
+
+Tính năng	Chi tiết
+1️⃣ BFS vs Dijkstra	Đường đỏ nét đứt = BFS qua 2 trạm (120km), Đường xanh = Dijkstra qua 3 trạm (90km). Legend bên dưới so sánh rõ ràng
+2️⃣ Popup chi tiết	Bấm vào marker bất kỳ → hiện tên thành phố, vai trò (xuất phát/đích/trung gian), khoảng cách từ điểm đầu, và trạm tiếp theo + km
+3️⃣ Animate đường đi	Đường Dijkstra xanh chạy từng đoạn một từ Quy Nhơn xuống Tuy Hòa thay vì hiện ra ngay 1 lúc
+Bạn muốn push code lên GitHub không, hay còn muốn thêm gì nữa ạ?
+
+eii cái số 3 chạy từng chút là sao vậy ạ 
+
+Tính năng số 3 là Animation (Hiệu ứng vẽ đường đi dần dần) — thay vì khi bấm "Tìm đường" thì cái đường xanh bật ra ngay lập tức, nó sẽ vẽ từng đoạn một, trông như kiểu một chiếc xe đang chạy thật sự từ Quy Nhơn xuống Tuy Hòa trên bản đồ.
+
+Kỹ thuật hoạt động bên dưới:
+
+javascript
+// Cứ mỗi 350ms thì thêm 1 điểm vào đường
+animTimer = setInterval(() => {
+    dijkstraLayer.addLatLng(coords[i]);  // thêm điểm tiếp theo
+    i++;
+}, 350);  // 350 mili-giây = 0.35 giây mỗi bước
+Nên với tuyến Quy Nhơn → Sông Cầu → Chí Thạnh → Tuy Hòa (4 điểm = 3 đoạn), bạn sẽ thấy:
+
+Giây 0: Chấm Quy Nhơn xuất hiện
+Giây 0.35: Đường vẽ đến Sông Cầu
+Giây 0.7: Đường vẽ tiếp đến Chí Thạnh
+Giây 1.05: Đường vẽ hoàn chỉnh tới Tuy Hòa ✅
+Thực tế vì bản đồ Leaflet chỉ có 4 điểm nên animation xảy ra hơi nhanh (chưa đến 2 giây). Nếu muốn thấy rõ hơn thì mình đổi từ 350 thành 700 hoặc 1000 (1 giây/đoạn) là thấy rõ mồn một. Bạn muốn chỉnh không ạ?
