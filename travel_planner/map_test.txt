@@ -1,5 +1,51 @@
-Quy Nhon;Chi Thanh;60.0
-Quy Nhon;Song Cau;20.0
-Song Cau;Chi Thanh;30.0
-Chi Thanh;Tuy Hoa;40.0
-Song Cau;Tuy Hoa;100.0
+# Bản đồ du lịch miền Trung - Nam Trung Bộ
+# Format: TênA;TênB;khoảngCách(km)
+
+# Huế - Đà Nẵng - Hội An
+Hue;Da Nang;100
+Da Nang;Hoi An;30
+Da Nang;Quang Nam;70
+Hoi An;Quang Nam;65
+
+# Quảng Nam - Quảng Ngãi
+Quang Nam;Quang Ngai;130
+
+# Quảng Ngãi - Quy Nhơn
+Quang Ngai;Quy Nhon;175
+
+# Quy Nhơn - Phú Yên
+Quy Nhon;Song Cau;20
+Quy Nhon;Chi Thanh;60
+Quy Nhon;Tay Son;50
+Tay Son;Quy Nhon;50
+Song Cau;Chi Thanh;30
+Song Cau;Tuy Hoa;100
+Chi Thanh;Tuy Hoa;40
+
+# Tuy Hòa - Nha Trang
+Tuy Hoa;Nha Trang;120
+
+# --- Khu vực nhà User (Bình Nghi) đến Đại học FPT (Tuyến thực tế) ---
+Nha Minh;Tx. An Nhon;12
+Tx. An Nhon;Thap Banh It;8
+
+# Tuyến QL19B (Màu xanh đậm - Dijkstra ưu tiên)
+Thap Banh It;Phuoc Thuan;8
+Phuoc Thuan;Dai Hoc FPT;5
+
+# Tuyến DT638 (Màu xanh nhạt - đường vòng nhiều nút nhẹ)
+Thap Banh It;DT638;6
+DT638;Nhon Phu;6
+Nhon Phu;Dai Hoc FPT;4
+
+# Tuyến đi QL1D qua đường khác (Đường xám)
+DT638;Nhon Binh;8
+Nhon Binh;Dai Hoc FPT;3
+
+# Tuyến đường tránh đi ngõ Phù Cát (Ít trạm nhất - BFS sẽ chọn vì chỉ mất ngã 3)
+Nha Minh;San Bay Phu Cat;20
+San Bay Phu Cat;Dai Hoc FPT;35
+
+# Kết nối với mạng lưới Bắc Nam
+Tx. An Nhon;Tay Son;20
+San Bay Phu Cat;Quy Nhon;30
