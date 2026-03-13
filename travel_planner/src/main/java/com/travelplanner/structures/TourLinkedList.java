@@ -91,4 +91,9 @@ public class TourLinkedList {
         }
         return count;
     }
+
+    // 7. Lấy đầu danh sách (For Web API serialization)
+    public LocationNode getHead() {
+        return head;
+    }
 }
