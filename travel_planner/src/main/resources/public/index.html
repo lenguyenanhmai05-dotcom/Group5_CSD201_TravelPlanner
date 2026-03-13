@@ -87,7 +87,12 @@
                     </div>
                 </div>
 
-                <div id="map-result" class="result-area hidden"></div>
+                <div id="map-result" class="result-area">
+                    <div class="empty-state">
+                        <span class="empty-state-icon">🗺️</span>
+                        <p>Nhập điểm đi và đến để tìm lộ trình ngắn nhất của bạn.</p>
+                    </div>
+                </div>
 
                 <div id="leaflet-map-container" class="hidden">
                     <div class="card" style="padding:16px">
@@ -156,7 +161,10 @@
                 <div class="card">
                     <h3>Lịch Trình Hiện Tại</h3>
                     <div id="tour-list" class="tour-list">
-                        <div class="loading">Đang tải...</div>
+                        <div class="empty-state">
+                            <span class="empty-state-icon">📅</span>
+                            <p>Lịch trình đang trống. Hãy thêm địa điểm mới ở trên!</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -185,7 +193,12 @@
                             <button class="chip" onclick="quickSearch('C003')">C003</button>
                             <button class="chip" onclick="quickSearch('C005')">C005</button>
                         </div>
-                        <div id="customer-search-result" class="result-area hidden" style="margin-top:16px"></div>
+                        <div id="customer-search-result" class="result-area">
+                            <div class="empty-state">
+                                <span class="empty-state-icon">🔍</span>
+                                <p>Bắt đầu tìm kiếm khách hàng bằng ID.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Add -->
