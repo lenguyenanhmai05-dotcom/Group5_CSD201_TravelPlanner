@@ -311,3 +311,33 @@ css
 
 style.css
  cho?
+ 
+Edited
++3
+-3
+Xong! Đã đổi lại màu cũ rồi nhé 🎨
+
+Nhấn Ctrl + Shift + R để reload trình duyệt là thấy lại màu hồng gốc #ff6b9d như trước!
+
+đổi thành option1
+
+Edited
++3
+-3
+Xong! Đã đổi sang Option 1 — Dusty Rose rồi nhé:
+
+Biến	Màu mới
+--accent	#b5687e — Hồng đất trầm
+--accent2	#c97d91 — Hồng phấn trầm
+--border	#e8d0d8 — Xám hồng nhẹ
+Nhấn Ctrl + Shift + R để thấy màu mới! Bạn thấy ổn hơn chưa? 🌹
+
+bạn quay lại cái màu cũ đi
+
+Edited
++3
+-3
+Xong! Đã trả lại màu hồng gốc #ff6b9d rồi nhé ✅
+
+Ctrl + Shift + R để thấy lại màu cũ!
+
