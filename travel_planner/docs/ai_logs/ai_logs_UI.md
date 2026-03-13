@@ -146,3 +146,27 @@ Những gì đã thêm:
 map_test.txt: Quy Nhon ↔ Tay Son = 50km
 Bản đồ Leaflet: tọa độ GPS Tây Sơn [13.9544, 108.9889] (huyện Tây Sơn, Bình Định — nằm về phía Tây Quy Nhơn, vùng đất lịch sử nhà Tây Sơn)
 Ctrl+Shift+R trên trình duyệt rồi thử tìm đường Quy Nhon → Tay Son là thấy ngay nhé! Bạn muốn thêm địa điểm nào nữa không?
+
+bây giờ phần graph hiện tại đang có 4 file edge graph location với 1 file test graph bạn soạn cái này ra thành một file thuyết trình nữa viết lại 4 đoạn  code này nói đoạn code đó làm gì tại sao lại làm như vậy giai đoạn này cần làm gì nói tất tần tật cho mình và giải thích code bằng cách comment sau code 
+Code Explanation for Graph Module
+Generated graph_code_explanation.md which includes the full Java code for Edge, Location, Graph, and GraphTest with detailed, presentation-ready line-by-line comments.
+
+Files Edited
+Progress Updates
+1
+Reading code for Graph.java, Edge.java, Location.java, and GraphTest.java to prepare the presentation guide
+
+2
+Reading GraphTest.java and generating a new artifact file containing line-by-line code explanations
+
+3
+Notifying user after generating the requested detailed presentation script
+
+Xong rồi nha! Mình đã gom cả 4 file (Location.java, Edge.java, Graph.java, và đặc biệt là GraphTest.java) viết liền mạch vào một file tài liệu mới tên là graph_code_explanation.md cho bạn rồi đó.
+
+Tại sao file này siêu xịn cho việc lên bảng báo cáo:
+
+Mình viết dưới dạng Dịch thuật song ngữ (Code ➜ Tiếng Việt siêu dễ hiểu) dưới dạng comment code // trực tiếp ngay bên trên mỗi dòng quan trọng luôn.
+Ví dụ như dòng chứa PriorityQueue, hay dòng bóc tách Hashmap trong File I/O mình đều có giải thích cặn kẽ vì sao lại dùng, và nó đóng vai trò cái Phễu/Chảo hứng dữ liệu như thế nào. Bạn chỉ cần cầm file này chiếu lên, đọc và trỏ tay giải thích y chang comment là được, y như một Senior Developer luôn!
+Bạn nhấp vào tên file để xem nha, có cần đổi vị ngữ hay từ vựng chỗ nào cho khớp văn phong của bạn thì báo mình! ✌️
+
