@@ -239,3 +239,175 @@ BFS trong Java: Hiện tại bạn đang chạy BFS ở phía JavaScript (Fronte
 Graph.java
  mới chỉ có Dijkstra.
 Lưu cache: Mỗi lần tìm đường là một lần tính toán lại. Với bản đồ nhỏ thì không sao, nhưng nếu bản đồ hàng triệu điểm thì người ta sẽ dùng kỹ thuật lưu lại các đường đã tìm. (Tuy nhiên với quy mô đồ ấn CSD201 thì không cần thiết).
+
+bạn xem thử 2 đoạn code đó hợp lí chưa ạ hay là có cái nào chưa nói mình cần bạn nhận xét đúng ạ chứ ko đi lung tung
+
+Mình xem kỹ cả 2 file: Graph.java và GraphTest.java rồi. Nhìn chung là khá ổn, logic đúng, test đúng hướng, nhưng có một vài điểm nhỏ nên chỉnh để tránh bị thầy bắt lỗi. Mình sẽ nhận xét đúng trọng tâm từng phần, không lan man.
+
+1️⃣ Nhận xét Graph.java
+✔️ Điểm tốt
+
+Dùng Adjacency List đúng
+
+Map<String, List<Edge>> adjList
+
+→ Đây là cách chuẩn để lưu graph.
+
+Graph vô hướng xử lý đúng
+
+adjList.get(sourceId).add(new Edge(destinationId, weight));
+adjList.get(destinationId).add(new Edge(sourceId, weight));
+
+Dijkstra viết đúng logic
+
+dùng PriorityQueue
+
+relaxation đúng
+
+lưu previousNodes để truy vết path
+
+Có kiểm tra lỗi node
+
+if (!locations.containsKey(startId) || !locations.containsKey(endId))
+
+Có xử lý unreachable
+
+if (distances.get(endId) == Double.MAX_VALUE)
+
+➡️ Tổng thể thuật toán chạy đúng.
+
+2️⃣ Điểm nhỏ nên chỉnh (quan trọng)
+❗ 1. printGraph() có thể lỗi NullPointer
+
+Đoạn này:
+
+List<Edge> edges = adjList.get(locId);
+for (Edge edge : edges)
+
+Nếu node không có edge → edges = null
+
+Có thể lỗi:
+
+NullPointerException
+Nên sửa an toàn hơn
+List<Edge> edges = adjList.get(locId);
+if (edges != null) {
+    for (Edge edge : edges) {
+        ...
+    }
+}
+❗ 2. loadFromFile() tạo Location hơi sơ sài
+addLocation(new Location(u, u));
+
+ID = Name
+
+Nếu project thật thì name nên khác id.
+
+Ví dụ:
+
+QN;SC;20
+
+Nhưng cái này không sai, chỉ là design chưa đẹp.
+
+❗ 3. Dijkstra chưa có visited set
+
+Thuật toán của bạn dùng cách này:
+
+if (current.distance > distances.get(currentId))
+continue;
+
+➡️ Đây là optimization đúng của Dijkstra
+
+Nên không bắt buộc visited set
+
+✔️ Chấp nhận được
+
+3️⃣ Nhận xét GraphTest.java
+
+File test này viết khá chuẩn JUnit.
+
+Có test:
+
+Test	Ý nghĩa
+addLocation + edge	test graph structure
+loadFromFile	test đọc dữ liệu
+dijkstra shortest path	test thuật toán
+unreachable path	test graph disconnected
+invalid node	test error handling
+
+➡️ Coverage khá tốt.
+
+4️⃣ Một lỗi nhỏ trong test
+❗ outContent chưa reset
+
+Ở test này:
+
+graph.printGraph();
+String graphOutput = outContent.toString();
+
+outContent đã chứa output trước đó.
+
+Nên kết quả có thể lẫn.
+
+Nên thêm
+outContent.reset();
+graph.printGraph();
+5️⃣ Một điểm có thể bị thầy hỏi
+
+Trong test:
+
+assertTrue(output.contains("Song Cau (20.0km)")
+
+Test kiểu contains
+
+➡️ Nếu format output thay đổi thì test fail.
+
+Ví dụ:
+
+20 km
+20.0 km
+
+Nhưng đây là cách test phổ biến nên không sai.
+
+6️⃣ Thiếu 1 test case quan trọng
+
+Bạn chưa test addEdge khi node không tồn tại
+
+Trong code có đoạn:
+
+if (!adjList.containsKey(sourceId) || !adjList.containsKey(destinationId)) {
+    System.err.println("One of the nodes does not exist!");
+}
+
+Nên nên có test
+
+@Test
+public void testAddEdgeInvalidNode() {
+    graph.addLocation(new Location("A","A"));
+
+    graph.addEdge("A","B",10);
+
+    String err = errContent.toString();
+
+    assertTrue(err.contains("One of the nodes does not exist!"));
+}
+7️⃣ Tổng đánh giá
+Tiêu chí	Đánh giá
+Graph structure	✔️ tốt
+Dijkstra implementation	✔️ đúng
+Error handling	✔️ có
+Test coverage	✔️ khá
+Code clarity	✔️ ổn
+Chấm theo kiểu thầy thường
+Mục	Điểm
+Graph structure	9/10
+Dijkstra	9/10
+File loading	8.5/10
+Testing	8.5/10
+
+➡️ Tổng thể khoảng 8.8 – 9 / 10
+
+8️⃣ Tóm lại nên sửa 3 chỗ nhỏ
+1️⃣ printGraph() tránh NullPointer
+2️⃣ outContent.reset() trước khi printGraph trong test
+3️⃣ thêm test addEdge invalid node
