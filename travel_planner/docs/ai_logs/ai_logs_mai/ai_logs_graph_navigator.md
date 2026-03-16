@@ -411,3 +411,136 @@ Testing	8.5/10
 1️⃣ printGraph() tránh NullPointer
 2️⃣ outContent.reset() trước khi printGraph trong test
 3️⃣ thêm test addEdge invalid node
+
+30 Câu hỏi "Cân não" cho 6 bài Test Graph 🚀
+Tài liệu này chia nhỏ từng bài trong 6 bài test của file 
+GraphTest.java
+, kèm theo 5 câu hỏi "xoáy" cho mỗi bài (Tổng cộng 30 câu).
+
+🧪 Bài Test 1: 
+testAddLocationAndEdge
+Mô tả: Tự tạo Quy Nhơn (City) và Diêu Trì (Station) rồi nối chúng lại với 10.5km.
+
+Tại sao em lại dùng locA và locB thay vì nhập thẳng tên vào hàm 
+addEdge
+?
+Trả lời: Dạ, để chứng minh là hệ thống quản lý được các đối tượng 
+Location
+ (có cả ID và Name) chứ không chỉ là các chuỗi ký tự đơn thuần.
+Nếu thầy xóa dòng graph.addLocation(locB) nhưng vẫn giữ dòng graph.addEdge(...) thì chuyện gì xảy ra?
+Trả lời: Bài test sẽ báo lỗi đỏ (Fail) và in ra: "One of the nodes does not exist!" vì hàm 
+addEdge
+ yêu cầu cả 2 đầu phải tồn tại trước.
+Tại sao em lại phải assertTrue tới 2 lần cho cùng một con đường 10.5km?
+Trả lời: Vì đây là đồ thị vô hướng. Em phải đảm bảo A nối với B thì B cũng phải tự động nối ngược lại với A.
+Nếu thầy đổi 10.5 thành -5.0, kết quả contains có còn đúng không?
+Trả lời: Dạ vẫn đúng về mặt văn bản (nó sẽ hiện -5.0km), nhưng nó sẽ chứng tỏ dữ liệu của thầy bị sai logic địa lý.
+Dấu ngoặc đơn 
+(10.5km)
+ trong code assertTrue lấy từ đâu ra?
+Trả lời: Dạ nó được định dạng trong hàm 
+printGraph()
+ ở file 
+Graph.java
+ ạ. Em phải viết đúng y hệt từng dấu cách và ngoặc thì test mới pass.
+🧪 Bài Test 2: 
+testLoadFromFile
+Mô tả: Đọc dữ liệu từ file 
+map_test.txt
+ và kiểm tra xem Quy Nhơn có nối với Sông Cầu (20km) không. 6. Nếu trong file 
+map_test.txt
+ thầy đổi ; thành , thì bài test này sẽ bị gì?
+
+Trả lời: Hàm split(";") sẽ không cắt được dữ liệu, dẫn đến mảng parts bị thiếu phần tử và in ra lỗi: "Invalid line format".
+Tại sao em lại phải dùng outContent.reset() ở dòng 63?
+Trả lời: Để xóa dòng chữ "Successfully loaded..." đi, giúp cho việc kiểm tra nội dung 
+printGraph()
+ phía sau được sạch sẽ, không bị lẫn lộn.
+Sao em biết chắc chắn Quy Nhơn phải nối với Sông Cầu (20.0km) mà test?
+Trả lời: Vì em dựa vào nội dung em đã soạn trong file 
+map_test.txt
+. Đây là cách test dựa trên dữ liệu đầu vào cố định.
+Nếu file 
+map_test.txt
+ có 1000 dòng, hàm 
+printGraph()
+ có làm bài test bị chậm không?
+Trả lời: Có ạ, vì in ra màn hình console là tác vụ tốn thời gian nhất. Trong thực tế, người ta thường test dữ liệu lớn mà không in ra console.
+Lệnh assertTrue dòng 67 kiểm tra cái gì?
+Trả lời: Kiểm tra xem sau khi load file, node "Quy Nhon" có thực sự tồn tại trong danh sách kề (Adjacency List) hay chưa.
+🧪 Bài Test 3: 
+testDijkstraShortestPath
+Mô tả: Tìm đường Quy Nhơn -> Tuy Hòa, kết quả phải là 90.0km và đúng lộ trình qua Sông Cầu, Chí Thạnh. 11. Tại sao em không chọn đường đi thẳng Quy Nhơn -> Tuy Hòa cho nhanh? - Trả lời: Vì theo dữ liệu trong file, đường đó dài hơn 90km. Dijkstra luôn ưu tiên tổng quãng đường ngắn nhất, không quan tâm phải qua bao nhiêu trạm. 12. Nếu thầy sửa đường Sông Cầu -> Chí Thạnh từ 30km lên 300km thì sao? - Trả lời: Dijkstra sẽ tự động tìm một con đường khác (ví dụ đi vòng đường khác) để đảm bảo tổng số km là nhỏ nhất có thể lúc đó. 13. Kết quả 90.0 km (có dấu cách) và 90.0km (viết liền) có quan trọng không?
+
+Trả lời: Rất quan trọng ạ! Bài test của em dùng contains("Total distance: 90.0 km"), nếu thiếu một dấu cách là bài test báo lỗi ngay mặc dù thuật toán chạy đúng.
+Làm sao thuật toán biết được thứ tự: Quy Nhon -> Song Cau -> Chi Thanh -> Tuy Hoa?
+Trả lời: Nhờ vào biến previousNodes lưu lại "vết" của các trạm đã đi qua, sau đó em dùng Collections.reverse() để lộn ngược lại từ đích về đầu.
+Nếu thầy muốn tìm đường từ Tuy Hòa về Quy Nhơn (ngược lại) thì kết quả có khác không?
+Trả lời: Dạ không, vì đây là đồ thị vô hướng, đường đi và khoảng cách hai chiều là như nhau.
+🧪 Bài Test 4: 
+testDijkstraUnreachablePath
+Mô tả: Test Kỳ Co và Eo Gió (không có đường nối). 16. Tại sao không nối đường cho Kỳ Co và Eo Gió? - Trả lời: Dạ để giả lập tình huống hai địa điểm bị chia cắt (ví dụ đảo), giúp kiểm tra xem code có bị lỗi "vòng lặp vô tận" khi không tìm thấy đích hay không. 17. Tại sao kết quả mong đợi lại chứa chữ "Beach"? - Trả lời: Vì lúc 
+addLocation
+, em đặt tên (Name) là "Ky Co Beach". Code in ra sử dụng Name để thân thiện với người dùng. 18. Chuyện gì xảy ra trong bộ nhớ khi không tìm thấy đường? - Trả lời: Biến khoảng cách (distance) của Eo Gió vẫn sẽ giữ giá trị Double.MAX_VALUE (Vô cực) như lúc khởi tạo. 19. Thầy muốn đổi thành "No route found" thay vì "No path exists" được không? - Trả lời: Được ạ, nhưng em phải sửa đồng bộ cả ở file 
+Graph.java
+ và file Test này thì nó mới Pass. 20. Tại sao em lại khai báo 2 node này ngay trong hàm @Test mà không để ở 
+setUp
+? - Trả lời: Để giữ cho các bài test khác không bị "rác". Hai node này chỉ sinh ra để phục vụ duy nhất bài test "ngõ cụt" này thôi.
+
+🧪 Bài Test 5: 
+testDijkstraInvalidNode
+Mô tả: Tìm đường Sài Gòn -> Hà Nội (không có tên trong bản đồ). 21. Tại sao em lại dùng errContent thay vì outContent? - Trả lời: Vì thông báo lỗi được em in ra bằng lệnh System.err.println. Đây là luồng dành riêng cho lỗi trong Java. 22. Nếu thầy nhập "quy nhon" (viết thường) thì nó có báo lỗi này không? - Trả lời: Có ạ, vì trong bản đồ em lưu là "Quy Nhon". Java phân biệt chữ Hoa/Thường nên nó sẽ coi là node không tồn tại. 23. Tại sao em lại chọn SÀI GÒN và HÀ NỘI để test? - Trả lời: Vì em biết chắc chắn 2 thành phố này không có trong file 
+map_test.txt
+ của em, dùng để test độ nhạy của việc bắt lỗi. 24. Nếu code không in ra dòng chữ này thì bài test sẽ hiện màu gì? - Trả lời: Sẽ hiện màu Đỏ (Fail) kèm thông báo: "Should print error for invalid nodes". 25. Làm sao em "bắt" được cái luồng lỗi System.err này vào biến của em? - Trả lời: Nhờ dòng code System.setErr(new PrintStream(errContent)) trong hàm 
+setUp
+ ạ.
+
+🧪 Bài Test 6: 
+testAddEdgeInvalidNode
+Mô tả: Thêm cạnh từ A (có thật) đến B (không có thật). 26. Hàm 
+addEdge("A", "B", 10)
+ có làm chương trình bị treo không? - Trả lời: Dạ không, nhờ có lệnh if (!adjList.containsKey...) em đã chặn lại và thoát hàm sớm bằng lệnh return. 27. Tại sao em lại tạo node "A" mà không tạo node "B"? - Trả lời: Để tạo ra tình huống "đầu thừa đuôi thẹo", kiểm tra xem hàm có tỉnh táo để nhận ra một trong hai đầu bị thiếu hay không. 28. Nếu thầy thêm graph.addLocation(new Location("B", "B")) vào trước đó thì test này sẽ thế nào? - Trả lời: Bài test sẽ bị Fail, vì lúc này lỗi sẽ không còn xảy ra nữa, mà code của em lại đang mong chờ phải có lỗi. 29. Thông báo "One of the nodes does not exist!" in ra ở đâu? - Trả lời: In ra màn hình lỗi (System.err). 30. Tại sao em không kiểm tra khoảng cách 10km ở bài test này? - Trả lời: Vì khi node không tồn tại, con đường 10km đó còn chưa kịp được tạo ra trong bộ nhớ, nên không có gì để kiểm tra khoảng cách ạ.
+
+🧪 Phần 3: 10 Câu hỏi về Trình diễn (GraphOutputTest.java)
+Mô tả: File này chứa hàm 
+runGraphDemo
+ để in kết quả đẹp mắt ra console.
+
+Tại sao trong 
+GraphOutputTest
+ em lại viết code trong một hàm @Test thay vì hàm 
+main
+?
+
+Trả lời: Để tận dụng trình chạy test của Maven. Chỉ cần gõ lệnh mvn test, Maven sẽ tự động lo việc biên dịch và chạy demo mà em không cần phải cài đặt cấu hình phức tạp hay tìm file .class thủ công.
+Nếu thầy muốn dừng việc in toàn bộ danh sách kề (Adjacency List) thì em xóa dòng nào?
+
+Trả lời: Dạ, em sẽ comment (khoá) dòng graph.printGraph(); ở dòng số 19 lại ạ. Lúc đó chương trình sẽ chỉ in kết quả tìm đường thôi.
+Tại sao trong Route 4 em lại sử dụng graph.addLocation trực tiếp trong code?
+
+Trả lời: Vì Kỳ Co và Eo Gió là các trạm lẻ em muốn thêm nhanh để demo trường hợp lỗi. Em không nhất thiết phải vào tận file 
+.txt
+ để sửa, giúp việc demo linh hoạt và nhanh hơn.
+Lệnh System.out.println trong file này có khác gì lệnh trong file 
+Graph.java
+ không?
+
+Trả lời: Về kỹ thuật thì giống nhau, nhưng trong file này em dùng nó để tạo ra các "tiêu đề" như [Phase 1], [Phase 2] giúp thầy cô dễ theo dõi diễn biến của chương trình hơn.
+Ở Route 6 (Add Edge With Missing node), tại sao em lại khởi tạo Graph graph2 = new Graph() mà không dùng lại graph cũ?
+
+Trả lời: Em tạo đồ thị mới để nó hoàn toàn trống rỗng. Nhờ vậy khi em thêm cạnh lỗi, thầy cô sẽ thấy rõ ràng là nó báo lỗi do thiếu dữ liệu, không bị nhầm lẫn với hàng chục tỉnh thành khác đã load trước đó.
+Tại sao em lại comment (vô hiệu hoá) Route 2 và Route 3?
+
+Trả lời: Để tiết kiệm thời gian demo ạ. Nếu thầy cô muốn xem thêm lộ trình Huế -> Nha Trang, em chỉ cần xóa dấu // đi là xong ngay, rất tiện lợi.
+Trong file này có dùng ByteArrayOutputStream để "đánh chặn" dữ liệu không?
+
+Trả lời: Dạ không. Ở file demo này, em muốn kết quả được in trực tiếp ra màn hình cho mọi người xem, nên em không cần phải redirect luồng in vào biến nào cả.
+Nếu trong Phase 1 (Nạp dữ liệu) bị lỗi, các Phase sau có chạy tiếp không?
+
+Trả lời: Có chạy tiếp ạ, nhưng vì dữ liệu nạp vào bị trống nên các Phase sau sẽ báo lỗi là "Địa điểm không tồn tại".
+Dấu gạch ngang === OPTIMAL RECOMMENDED ROUTE === in ra để làm gì?
+
+Trả lời: Dạ để tạo điểm nhấn thị giác ạ. Nó giúp người xem phân biệt được đâu là thông tin log hệ thống và đâu là kết quả quan trọng nhất mà thuật toán đã tìm ra.
+Nếu em muốn in ra thêm thời gian chạy của thuật toán Dijkstra (tính bằng mili giây), em sẽ thêm code vào đâu?
+
+Trả lời: Em sẽ dùng System.currentTimeMillis() trước và sau lệnh graph.dijkstra(...), sau đó trừ đi để ra thời gian thực hiện và in ra console ạ.
