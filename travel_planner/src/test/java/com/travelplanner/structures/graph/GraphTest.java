@@ -20,7 +20,7 @@ public class GraphTest {
     @BeforeEach
     public void setUp() {
         graph = new Graph();
-        //Redirect
+        // Redirect
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
@@ -60,6 +60,7 @@ public class GraphTest {
         assertTrue(output.contains("Successfully loaded map data from: " + testFilePath),
                 "Should successfully load file");
 
+        outContent.reset();
         graph.printGraph();
         String graphOutput = outContent.toString();
 
@@ -70,7 +71,7 @@ public class GraphTest {
 
     @Test
     public void testDijkstraShortestPath() {
-        
+
         graph.loadFromFile("map_test.txt");
         outContent.reset();
 
@@ -108,5 +109,15 @@ public class GraphTest {
         String errOutput = errContent.toString();
 
         assertTrue(errOutput.contains("Start or end node does not exist!"), "Should print error for invalid nodes");
+    }
+
+    @Test
+    public void testAddEdgeInvalidNode() {
+
+        graph.addLocation(new Location("Quy Nhon", "Quy Nhon City"));
+        graph.addEdge("Quy Nhon", "B", 10);
+
+        String err = errContent.toString();
+        assertTrue(err.contains("One of the nodes does not exist!"));
     }
 }
