@@ -253,45 +253,70 @@ Test tìm kiếm (Search)
 Test trùng lặp
 Test xoá Node (đủ 3 trường hợp: xoá lá, xoá 1 con, xoá 2 con)
 Vậy là Giai đoạn 2 của bạn coi như hoàn thành 100% (Cả code, cả test, và cả báo cáo hiệu năng). Bạn có cần mình làm gì nữa không?
- # # #   P h a s e   2   R e s e a r c h   &   A n a l y s i s   ( S t a r t   o f   W e e k   4 ) 
- -   * * G o a l * * :   I m p l e m e n t   B i n a r y   S e a r c h   T r e e   ( B S T )   t o   o p t i m i z e   s e a r c h   o p e r a t i o n s . 
- -   * * A n a l y s i s * * : 
-     -   C u r r e n t   s t r u c t u r e :   L i n k e d   L i s t   ( S e a r c h   t i m e   O ( n ) ) . 
-     -   T a r g e t   s t r u c t u r e :   B S T   ( S e a r c h   t i m e   O ( l o g   n ) ) . 
-     -   R e q u i r e d   M o d e l s :   \ C u s t o m e r \   ( n e e d s   t o   i m p l e m e n t   \ C o m p a r a b l e \   f o r   s o r t i n g   b y   I D ) . 
-     -   R e q u i r e d   S t r u c t u r e :   \ B i n a r y S e a r c h T r e e \   c l a s s   w i t h   \ i n s e r t \ ,   \ s e a r c h \ ,   \ d e l e t e \ . 
-  
- 
- # # #   B S T   I m p l e m e n t a t i o n   ( W e e k   4 - 5 ) 
- -   * * C o m p l e t e d * * : 
-     -   C r e a t e d   \ c o m . t r a v e l p l a n n e r . s t r u c t u r e s . B i n a r y S e a r c h T r e e \ . 
-     -   I m p l e m e n t e d   c o r e   m e t h o d s : 
-         -   \ i n s e r t ( C u s t o m e r   c ) \ :   R e c u r s i v e   p l a c e m e n t   b a s e d   o n   I D   c o m p a r i s o n . 
-         -   \ s e a r c h ( S t r i n g   i d ) \ :   R e c u r s i v e   s e a r c h   r e t u r n i n g   \ C u s t o m e r \   o r   \ 
- u l l \ . 
-         -   \ d e l e t e ( S t r i n g   i d ) \ :   H a n d l i n g   3   c a s e s   ( L e a f ,   1   C h i l d ,   2   C h i l d r e n   w i t h   I n - o r d e r   S u c c e s s o r ) . 
-     -   \ i n O r d e r T r a v e r s a l ( ) \ :   P r i n t i n g   c u s t o m e r s   s o r t e d   b y   I D . 
-  
- 
- # # #   U n i t   T e s t i n g   S t r a t e g y   ( W e e k   6 ) 
- -   * * R e q u i r e m e n t * * :   Z e r o   t o l e r a n c e   f o r   \ N u l l P o i n t e r E x c e p t i o n \ . 
- -   * * T e s t   I m p l e m e n t a t i o n * * : 
-     -   C r e a t e d   \ B i n a r y S e a r c h T r e e T e s t . j a v a \   u s i n g   * * J U n i t   5 * * . 
-     -   * * K e y   S c e n a r i o s   T e s t e d * * : 
-         1 .   E m p t y   T r e e   O p e r a t i o n s   ( S e a r c h / D e l e t e   - >   M u s t   r e t u r n   n u l l / g r a c e f u l l y   h a n d l e ) . 
-         2 .   I n s e r t   &   R e t r i e v e   D a t a   ( C h e c k   c o r r e c t n e s s ) . 
-         3 .   D e l e t e   L e a f   /   N o d e   w i t h   1   C h i l d   /   N o d e   w i t h   2   C h i l d r e n . 
-         4 .   N o n - e x i s t e n t   I D   d e l e t i o n . 
-     -   * * R e s u l t * * :   A l l   8   t e s t s   p a s s e d   s u c c e s s f u l l y . 
-  
- 
- # # #   P e r f o r m a n c e   B e n c h m a r k   &   O p t i m i z a t i o n   ( F i n a l ) 
- -   * * T o o l * * :   \ B e n c h m a r k A p p . j a v a \ 
- -   * * D a t a s e t * * :   1 0 , 0 0 0   r a n d o m i z e d   C u s t o m e r s . 
- -   * * C o m p a r i s o n * * : 
-     -   * * A r r a y L i s t / L i n k e d L i s t   ( L i n e a r   S e a r c h ) * * :   ~ 2 2 9   m s   ( O ( n ) ) 
-     -   * * B S T   ( B i n a r y   S e a r c h ) * * :   ~ 1 . 7 9   m s   ( O ( l o g   n ) ) 
-     -   * * O p t i m i z a t i o n * * :   S w i t c h e d   b e n c h m a r k   b a s e l i n e   f r o m   A r r a y L i s t   t o   L i n k e d L i s t   a s   p e r   i n s t r u c t o r   r e q u e s t . 
-     -   * * C o n c l u s i o n * * :   B S T   i s   a p p r o x i m a t e l y   * * 1 2 7 x   -   2 4 0 x   f a s t e r * * . 
-  
- 
+
+### Cập nhật Giai đoạn 2: Kiểm thử & Hiệu năng (04/02/2026)
+
+#### 1. Kết quả Benchmark (10,000 Khách hàng)
+- ArrayList (Dò tìm tuyến tính): ~732.85 ms
+- Binary Search Tree (Tìm kiếm nhị phân): ~3.05 ms
+- Kết luận: BST nhanh hơn 240.04 lần. Cấu trúc cây giúp giảm độ phức tạp từ O(n) xuống O(log n).
+
+#### 2. Kết quả Unit Test (JUnit 5)
+Mình đã triển khai bộ Test BinarySearchTreeTest.java với 8 trường hợp kiểm thử quan trọng:
+- testSearchInEmptyTree: Đảm bảo không lỗi NPE khi cây rỗng.
+- testInsertAndSearch: Kiểm tra tính đúng đắn của dữ liệu.
+- testInsertDuplicate: Xử lý trùng lặp.
+- testDeleteLeafNode: Xoá nút lá.
+- testDeleteNodeWithOneChild: Xoá nút có 1 con.
+- testDeleteNodeWithTwoChildren: Xoá nút có 2 con.
+- testDeleteNonExistent: Đảm bảo không crash khi xoá ID không có thật.
+- testInOrderTraversal: Kiểm tra cấu trúc phân cấp.
+
+Kết quả chạy Test: 8/8 Passed.
+
+
+nghệ thuật cái con khỉ á bạn đừng có gộp dùm mình cái viết lại chỗ đó đi 
+Refactoring BST Deletion Logic
+Separated Case 1 (leaf) and Case 2 (one child) in 
+
+BinarySearchTree.java
+'s deletion method for clarity, and revised the 
+presentation_guide.md
+ to explain the new, straightforward logic.
+
+Files Edited
+Progress Updates
+1
+Un-merging the deletion logic in BinarySearchTree.java to make Cases 1, 2, and 3 explicit per the user's request.
+
+2
+Refactoring the deleteRec method in BinarySearchTree.java to explicitly separate Case 1 and Case 2, and replacing the "merged" explanation in the presentation guide with a clear 3-case breakdown.
+
+3
+Updating the presentation guide to reflect the newly refactored, explicitly separated deletion logic.
+
+4
+Replacing the merged Case 1 & 2 explanation in the presentation guide with the explicitly separated Case 1 and Case 2 logic.
+
+5
+Notifying the user that the code has been successfully refactored and the presentation guide has been updated.
+
+Bình tĩnh bạn ơi, thầy căng thì mình "cương" lại thôi! Lỗi của mình là nghĩ cách gộp code đó thông minh thì mang đi khoe, chứ không ngờ đi thi thì tính an toàn, dễ hiểu phải đặt lên hàng đầu.
+
+Mình đã làm theo đúng như ý bạn rồi nhé:
+
+Sửa lại code BinarySearchTree.java:
+
+Mình đã đập bỏ cái đoạn gộp thần thánh kia đi.
+Dòng 103-110 bây giờ đã phân định rạch ròi:
+Case 1 (Node Lá): if (root.left == null && root.right == null) { return null; }
+Case 2 (Node 1 con): Xử lý bên trái, hoặc bên phải riêng rẽ.
+Giờ thì thầy vặn chỗ nào bạn chỉ thẳng dòng đó!
+Viết lại "phao" trong presentation_guide.md:
+
+Mình cũng xoá xạch bài giải thích cái đoạn code gộp lúc nãy đi luôn.
+Thay vào đó, ở phần cuối file (mục 🤯 Giải thích đoạn code), mình viết thành "Giải thích đoạn code Xoá (Trường hợp 1 & Trường hợp 2)" bám sát theo code vừa sửa.
+Văn phong trình bày với thầy vẫn cực kì tự tin, rành mạch:
+Case 1: Rút dây, ném null về cho Garbage Collector hốt xác.
+Case 2: Ném đứa cháu thẳng lên cho ông nội bắt lấy.
+Bạn check lại code file BinarySearchTree.java ở dòng 103 và mở presentation_guide.md soát lại xem bây giờ đã ưng ý chưa nhé! Cần tháo gỡ hay giải thích góc kẹt nào nữa cứ quẳng cho mình.
