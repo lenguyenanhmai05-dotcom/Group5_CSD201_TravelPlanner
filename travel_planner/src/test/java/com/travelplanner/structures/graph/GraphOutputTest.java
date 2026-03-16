@@ -39,6 +39,12 @@ public class GraphOutputTest {
         System.out.println("\n> Route 5: Invalid Node (SAI GON -> HA NOI)");
         graph.dijkstra("SAI GON", "HA NOI");
 
+        System.out.println("\n> Route 6: Add Edge With Missing Node");
+
+        Graph graph2 = new Graph();
+        graph2.addLocation(new Location("Quy Nhon", "Quy Nhon City"));
+        graph2.addEdge("Quy Nhon", "B", 10);
+
         System.out.println("\n=== END OF OUTPUT ===\n");
     }
 }
