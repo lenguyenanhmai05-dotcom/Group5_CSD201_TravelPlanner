@@ -20,7 +20,7 @@ public class GraphTest {
     @BeforeEach
     public void setUp() {
         graph = new Graph();
-        // Redirect System.out and System.err to capture output for assertions
+        //Redirect
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
@@ -41,12 +41,9 @@ public class GraphTest {
         graph.addLocation(locB);
         graph.addEdge("Quy Nhon", "Dieu Tri", 10.5);
 
-        // We can verify through printGraph output
         graph.printGraph();
         String output = outContent.toString();
 
-        // Since it's an undirected graph, both should be printed connected to each
-        // other
         assertTrue(output.contains("Quy Nhon City is connected to: Dieu Tri Station (10.5km)"),
                 "Node A should be connected to Node B");
         assertTrue(output.contains("Dieu Tri Station is connected to: Quy Nhon City (10.5km)"),
@@ -55,7 +52,7 @@ public class GraphTest {
 
     @Test
     public void testLoadFromFile() {
-        // Assume map_test.txt is present in the project root directory
+
         String testFilePath = "map_test.txt";
         graph.loadFromFile(testFilePath);
 
@@ -63,10 +60,9 @@ public class GraphTest {
         assertTrue(output.contains("Successfully loaded map data from: " + testFilePath),
                 "Should successfully load file");
 
-        // Verify some edges
         graph.printGraph();
         String graphOutput = outContent.toString();
-        // We use contains checking to ignore order
+
         assertTrue(graphOutput.contains("Quy Nhon is connected to:"), "Quy Nhon should have connections");
         assertTrue(graphOutput.contains("Song Cau (20.0km)"), "Should contain edge to Song Cau");
         assertTrue(graphOutput.contains("Chi Thanh (60.0km)"), "Should contain edge to Chi Thanh");
@@ -74,9 +70,8 @@ public class GraphTest {
 
     @Test
     public void testDijkstraShortestPath() {
-        // Load the test graph
+        
         graph.loadFromFile("map_test.txt");
-        // Clear the load output to only test the algorithm output
         outContent.reset();
 
         // Run Dijkstra from Quy Nhon to Tuy Hoa
