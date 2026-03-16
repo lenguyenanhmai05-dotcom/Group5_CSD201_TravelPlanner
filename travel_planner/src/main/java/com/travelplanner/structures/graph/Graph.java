@@ -76,9 +76,11 @@ public class Graph {
             Location loc = locations.get(locId);
             System.out.print(loc.getName() + " is connected to: ");
             List<Edge> edges = adjList.get(locId);
-            for (Edge edge : edges) {
-                Location dest = locations.get(edge.getDestinationId());
-                System.out.print(dest.getName() + " (" + edge.getWeight() + "km) | ");
+            if (edges != null) {
+                for (Edge edge : edges) {
+                    Location dest = locations.get(edge.getDestinationId());
+                    System.out.print(dest.getName() + " (" + edge.getWeight() + "km) | ");
+                }
             }
             System.out.println();
         }
