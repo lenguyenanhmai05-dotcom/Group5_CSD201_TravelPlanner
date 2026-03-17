@@ -98,7 +98,7 @@ public class GraphTest {
         // No edges between them
 
         graph.dijkstra("Ky Co", "Eo Gio");
-        String output = outContent.toString();
+        String output = errContent.toString();
 
         assertTrue(output.contains("No path exists from Ky Co Beach to Eo Gio"), "Should state that no path exists");
     }
