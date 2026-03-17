@@ -403,3 +403,83 @@ Mình viết dưới dạng Dịch thuật song ngữ (Code ➜ Tiếng Việt s
 Ví dụ như dòng chứa PriorityQueue, hay dòng bóc tách Hashmap trong File I/O mình đều có giải thích cặn kẽ vì sao lại dùng, và nó đóng vai trò cái Phễu/Chảo hứng dữ liệu như thế nào. Bạn chỉ cần cầm file này chiếu lên, đọc và trỏ tay giải thích y chang comment là được, y như một Senior Developer luôn!
 Bạn nhấp vào tên file để xem nha, có cần đổi vị ngữ hay từ vựng chỗ nào cho khớp văn phong của bạn thì báo mình! ✌️
 
+
+Câu hỏi của bạn cực kỳ sắc sảo! Thầy cô rất thích hỏi những điểm "bất thường" như thế này đó. Mình sẽ giải thích cặn kẽ từng ý để bạn cầm "vũ khí" này đi bảo vệ nhé:
+
+1. Tại sao cây lại bị lệch sang phải (Skewed Tree)?
+Bạn nhận xét đúng là nó đang bị lệch (chủ yếu là các mã D001, D002, D004 nằm hết bên phải).
+
+Lý do: Trong cây BST (như loại bạn đang dùng), hình dáng của cây phụ thuộc 100% vào thứ tự bạn nhập dữ liệu.
+Nếu bạn nhập theo thứ tự tăng dần (ví dụ: C001 -> C003 -> C005 -> D001...), thì các nút mới luôn lớn hơn nút cũ và cứ thế "dạt" hết sang bên phải.
+Đây gọi là Cây bị thoái hóa (Degenerated Tree).
+Ý kiến của mình: Bạn đừng sợ nó "không tối ưu". Hãy biến nó thành điểm nhấn khi thuyết trình:
+"Thưa thầy, đây là một ví dụ thực tế về việc cây BST bị lệch. Vì em nhập các mã ID theo thứ tự tăng dần, nên cây phát triển về bên phải. Điều này cho thấy cây BST thông thường chưa có cơ chế tự cân bằng. Nếu muốn tối ưu hơn, em có thể chọn nhập mã 'ở giữa' trước hoặc sử dụng cây AVL để nó tự dàn đều ra ạ!" (Nói câu này xong thầy cô sẽ cực kỳ ấn tượng vì bạn hiểu rõ nhược điểm của cấu trúc dữ liệu).
+
+2. Logic so sánh: Chữ cái hay Con số?
+Bạn đoán đúng rồi đó! Trong Java, mình dùng hàm id.compareTo(), nó so sánh theo Thứ tự từ điển (Lexicographical Order):
+
+Quy tắc: Nó so sánh từng ký tự một từ trái sang phải.
+Thứ tự ưu tiên: Số (0-9) < Chữ hoa (A-Z) < Chữ thường (a-z).
+Ví dụ của bạn:
+C001 < C003 (vì ký tự thứ tư: '1' < '3').
+C005 < D001 (vì ký tự đầu tiên: 'C' < 'D').
+C10 sẽ nhỏ hơn C2 (vì tại vị trí thứ hai, '1' nhỏ hơn '2'). Đó là lý do tại sao mình bảo bạn nên dùng C001, C002 để các số luôn có cùng độ dài, giúp việc so sánh luôn chính xác.
+💡 Mẹo để cây "Đẹp và Cân đối" khi demo:
+Nếu bạn muốn biểu đồ nhìn "xịn", không bị lệch, hãy nhập theo thứ tự "Gốc ở giữa" như sau:
+
+Nhập mã C005 trước (Làm gốc).
+Nhập mã C002 (Nó sẽ sang trái).
+Nhập mã D001 (Nó sẽ sang phải).
+Nhập mã C001 (Sang trái của C002).
+Nhập mã C003 (Sang phải của C002).
+Lúc này cây sẽ tỏa đều ra hai bên cực kỳ đẹp mắt!
+
+Mình sẽ cập nhật 2 ý này (Cây bị lệch và Logic so sánh) vào file bí kíp bảo vệ ngay bây giờ để bạn không quên nhé! 🦊🚀✨🏆🗺️🌳
+
+Edited
+Mình đã cập nhật thêm 2 câu hỏi "hóc búa" này vào file hướng dẫn bảo vệ (Câu số 13 và 14) rồi nhé!
+
+👉 
+stage_4_defense_guide.md
+
+Tóm tắt nhanh để bạn nắm ý:
+
+Về việc cây bị lệch: Đừng lo lắng! Hãy biến nó thành cơ hội để khoe kiến thức. Bạn hãy giải thích là do thứ tự nhập dữ liệu (nhập tăng dần thì lệch phải). Đây là "tính năng" của BST cơ bản, và nếu muốn sửa thì phải dùng cây AVL hoặc chọn Root là số ở giữa.
+Về logic so sánh: Hệ thống so sánh theo kiểu "từ điển" (Lexicographical). Nó so từng chữ cái/con số từ trái qua phải. Đó là lý do tại sao C005 < D001 (vì 'C' < 'D').
+Bạn có muốn mình tạo một file "Kịch bản demo cây BST" để hướng dẫn bạn cách nhập mã sao cho cây hiện ra đẹp nhất không? 🦊✨🌳🗺️🏆🥇🏅
+
+vậy bạn hãy chỉnh lại các nội dung gốc có sẵn thành một cái gốc hợp lí nằm ở giữa đi chứ không là nó bị suy biến mất rồi ạ ví dụ chữ cái giữa của bảng chữ cái rồi số 100 hay 150 gì đó làm gốc đi ạ 
+
+
+Balancing Seed Data for BST Visualization
+I have successfully updated the seed data in 
+
+CustomerController.java
+. The new set of IDs starts with "M100" as the root and is inserted in an order that ensures a perfectly balanced and symmetrical tree visualization. This demonstration will now look much more professional and clearly represent the binary property of the tree.
+
+Files Edited
+Progress Updates
+1
+Reading CustomerController.java to find current seed data.
+
+2
+Updating seed data in CustomerController.java for a balanced BST.
+
+3
+Notifying the user of the balanced BST seed data.
+
+Ý tưởng quá xuất sắc luôn! 🎯 Mình đã thực hiện "cân bằng" lại cái cây cho bạn rồi đây.
+
+Những thay đổi mình vừa làm:
+
+Gốc mới cực chuẩn: Mình đã đổi Root (Gốc) thành mã M100 (Chữ 'M' nằm giữa bảng chữ cái, số '100' nằm giữa các mốc).
+Dàn đều hai bên: Mình đã tính toán thứ tự nhập dữ liệu sao cho cây tỏa đều ra hai bên cực kỳ đối xứng:
+Nhánh trái (Nhỏ hơn M): Có các mã khởi đầu bằng chữ A, C (như A050, C100, C150).
+Nhánh phải (Lớn hơn M): Có các mã khởi đầu bằng chữ S, P, Z (như P050, S100, Z200).
+Hết suy biến: Bây giờ cây không còn bị "lệch" hay "gầy" nữa mà trông rất vững chãi và cân đối. Thầy cô nhìn vào sẽ thấy ngay một ví dụ điển hình của Cây nhị phân tìm kiếm đã được tối ưu!
+⚠️ Bạn hãy thực hiện:
+
+Dừng và Chạy lại WebApp.java (để Backend nạp bộ dữ liệu mẫu mới này).
+F5 lại trang Web.
+Bây giờ bạn mở tab Khách hàng lên, bạn sẽ thấy cái cây "đẹp như tranh" hiện ra ngay lập tức! Chúc bạn có một buổi bảo vệ thật thành công nhé! 🦊🚀✨🏆🌳🥇🏅🗺️⚖️👤
+
