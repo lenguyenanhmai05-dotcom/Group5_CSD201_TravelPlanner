@@ -159,7 +159,7 @@ public class Graph {
     private void printPath(String startId, String endId, Map<String, Double> distances,
             Map<String, String> previousNodes) {
         if (distances.get(endId) == Double.MAX_VALUE) {
-            System.out.println("No path exists from " + locations.get(startId).getName() + " to "
+            System.err.println("No path exists from " + locations.get(startId).getName() + " to "
                     + locations.get(endId).getName());
             return;
         }
