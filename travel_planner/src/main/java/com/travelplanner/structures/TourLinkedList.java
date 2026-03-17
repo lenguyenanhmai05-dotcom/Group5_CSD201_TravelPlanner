@@ -70,7 +70,21 @@ public class TourLinkedList {
         return false;
     }
 
-    // 5. In danh sách
+    // 5. Cập nhật thông tin (Update) - MỚI
+    public boolean update(String id, String newDesc, double newPrice) {
+        LocationNode curr = head;
+        while (curr != null) {
+            if (curr.info.getId().equals(id)) {
+                curr.info.setDescription(newDesc);
+                curr.info.setPrice(newPrice);
+                return true;
+            }
+            curr = curr.next;
+        }
+        return false;
+    }
+
+    // 6. In danh sách
     public String print() {
         StringBuilder result = new StringBuilder();
         LocationNode temp = head;
