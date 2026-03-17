@@ -36,9 +36,8 @@ public class TourController {
         ctx.json(result);
     }
 
-    // POST /api/tour/add — Add a new location (JSON body: {id, name, description,
-    // price})
-    public void add(Context ctx) {
+    // POST /api/tour/add — Add a new location at the END (Add Last)
+    public void addLast(Context ctx) {
         try {
             @SuppressWarnings("unchecked")
             Map<String, Object> body = mapper.readValue(ctx.body(), Map.class);
@@ -49,9 +48,89 @@ public class TourController {
 
             TourLocation loc = new TourLocation(id, name, description, price);
             tour.addLast(loc);
-            ctx.status(201).json(Map.of("message", "Added " + name + " successfully"));
+            ctx.status(201).json(Map.of("message", "Đã thêm " + name + " vào cuối lịch trình"));
         } catch (Exception e) {
-            ctx.status(400).json(Map.of("error", "Invalid request: " + e.getMessage()));
+            ctx.status(400).json(Map.of("error", "Lỗi: " + e.getMessage()));
+        }
+    }
+
+    // POST /api/tour/addFirst — Add a new location at the START (Add First)
+    public void addFirst(Context ctx) {
+        try {
+            @SuppressWarnings("unchecked")
+            Map<String, Object> body = mapper.readValue(ctx.body(), Map.class);
+            String id = (String) body.get("id");
+            String name = (String) body.get("name");
+            String description = body.getOrDefault("description", "").toString();
+            double price = body.containsKey("price") ? ((Number) body.get("price")).doubleValue() : 0.0;
+
+            TourLocation loc = new TourLocation(id, name, description, price);
+            tour.addFirst(loc);
+            ctx.status(201).json(Map.of("message", "Đã chèn " + name + " vào đầu lịch trình"));
+        } catch (Exception e) {
+            ctx.status(400).json(Map.of("error", "Lỗi: " + e.getMessage()));
+        }
+    }
+
+    // POST /api/tour/insert — Insert a new location AFTER a specific ID
+    public void insertAfter(Context ctx) {
+        try {
+            @SuppressWarnings("unchecked")
+            Map<String, Object> body = mapper.readValue(ctx.body(), Map.class);
+            String afterId = (String) body.get("afterId");
+            String id = (String) body.get("id");
+            String name = (String) body.get("name");
+            String description = body.getOrDefault("description", "").toString();
+            double price = body.containsKey("price") ? ((Number) body.get("price")).doubleValue() : 0.0;
+
+            TourLocation loc = new TourLocation(id, name, description, price);
+            boolean success = tour.insertAfter(afterId, loc);
+            if (success) {
+                ctx.status(201).json(Map.of("message", "Đã chèn " + name + " sau điểm " + afterId));
+            } else {
+                ctx.status(404).json(Map.of("error", "Không tìm thấy điểm ID: " + afterId));
+            }
+        } catch (Exception e) {
+            ctx.status(400).json(Map.of("error", "Lỗi: " + e.getMessage()));
+        }
+    }
+
+    // POST /api/tour/batch-add — Add multiple locations from a list
+    public void batchAdd(Context ctx) {
+        try {
+            @SuppressWarnings("unchecked")
+            List<Map<String, Object>> locations = mapper.readValue(ctx.body(), List.class);
+            for (Map<String, Object> item : locations) {
+                String id = (String) item.get("id");
+                String name = (String) item.get("name");
+                String description = item.getOrDefault("description", "").toString();
+                double price = item.containsKey("price") ? ((Number) item.get("price")).doubleValue() : 0.0;
+                
+                tour.addLast(new TourLocation(id, name, description, price));
+            }
+            ctx.status(201).json(Map.of("message", "Đã lưu " + locations.size() + " điểm vào lịch trình!"));
+        } catch (Exception e) {
+            ctx.status(400).json(Map.of("error", "Lỗi lưu hàng loạt: " + e.getMessage()));
+        }
+    }
+
+    // PUT /api/tour/update — Update a location's details
+    public void update(Context ctx) {
+        try {
+            @SuppressWarnings("unchecked")
+            Map<String, Object> body = mapper.readValue(ctx.body(), Map.class);
+            String id = (String) body.get("id");
+            String description = (String) body.get("description");
+            double price = ((Number) body.get("price")).doubleValue();
+
+            boolean updated = tour.update(id, description, price);
+            if (updated) {
+                ctx.json(Map.of("message", "Đã cập nhật điểm " + id + " thành công!"));
+            } else {
+                ctx.status(404).json(Map.of("error", "Không tìm thấy điểm ID: " + id));
+            }
+        } catch (Exception e) {
+            ctx.status(400).json(Map.of("error", "Lỗi cập nhật: " + e.getMessage()));
         }
     }
 
