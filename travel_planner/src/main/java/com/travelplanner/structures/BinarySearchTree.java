@@ -1,6 +1,8 @@
 package com.travelplanner.structures;
 
 import com.travelplanner.entities.Customer;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BinarySearchTree {
     private Node root;
@@ -9,14 +11,23 @@ public class BinarySearchTree {
         this.root = null;
     }
 
-    // 1. Insert (Recursion)
-    public void insert(Customer customer) {
+    public Node getRoot() {
+        return root;
+    }
+
+    // 1. Insert (Recursion) - Returns true if inserted, false if duplicate
+    private boolean lastInsertSuccess = false;
+
+    public boolean insert(Customer customer) {
+        lastInsertSuccess = false;
         root = insertRec(root, customer);
+        return lastInsertSuccess;
     }
 
     private Node insertRec(Node root, Customer customer) {
         if (root == null) {
             root = new Node(customer);
+            lastInsertSuccess = true;
             return root;
         }
 
@@ -28,6 +39,7 @@ public class BinarySearchTree {
         else if (customer.compareTo(root.info) > 0) {
             root.right = insertRec(root.right, customer);
         }
+        // If IDs are equal, we don't insert (silently ignore, lastInsertSuccess remains false)
 
         return root;
     }
@@ -82,7 +94,22 @@ public class BinarySearchTree {
         return 1 + countRec(root.left) + countRec(root.right);
     }
 
-    // 5. Delete (Recursion)
+    // 5. Get all customers (In-Order: Sorted by ID)
+    public List<Customer> getAllInOrder() {
+        List<Customer> list = new ArrayList<>();
+        getAllInOrderRec(root, list);
+        return list;
+    }
+
+    private void getAllInOrderRec(Node node, List<Customer> list) {
+        if (node != null) {
+            getAllInOrderRec(node.left, list);
+            list.add(node.info);
+            getAllInOrderRec(node.right, list);
+        }
+    }
+
+    // 6. Delete (Recursion)
     public void delete(String id) {
         root = deleteRec(root, id);
     }

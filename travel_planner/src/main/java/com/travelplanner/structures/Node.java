@@ -12,4 +12,8 @@ public class Node {
         this.left = null;
         this.right = null;
     }
+
+    public Customer getInfo() { return info; }
+    public Node getLeft() { return left; }
+    public Node getRight() { return right; }
 }
