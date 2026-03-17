@@ -45,6 +45,5 @@ public class GraphOutputTest {
         graph2.addLocation(new Location("Quy Nhon", "Quy Nhon City"));
         graph2.addEdge("Quy Nhon", "B", 10);
 
-        System.out.println("\n=== END OF OUTPUT ===\n");
     }
 }
