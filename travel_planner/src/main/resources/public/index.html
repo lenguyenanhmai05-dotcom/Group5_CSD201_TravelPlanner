@@ -23,7 +23,7 @@
                     <img src="nou.png" alt="Logo" class="logo-img">
                     <div>
                         <h1>Travel Planner</h1>
-                        <p class="logo-sub">CSD201 — Group 5 — Data Structures & Algorithms</p>
+                        <p class="logo-sub">CSD201 — Group 4 — Data Structures & Algorithms</p>
                     </div>
                 </div>
                 <div class="badges">
@@ -75,7 +75,7 @@
 
                     <div class="quick-routes" style="margin-bottom: 8px;">
                         <span class="quick-label">Tuyến đường địa phương: </span>
-                        <button class="chip" style="background-color: #3b82f6; color: white" onclick="quickRoute('Nha Minh','Dai Hoc FPT')">Nhà Mình (Bình Nghi) → ĐH FPT</button>
+                        <button class="chip" style="background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; border: none; font-weight: 600;" onclick="quickRoute('Nha Minh','Dai Hoc FPT')">Nhà Mình (Bình Nghi) → ĐH FPT</button>
                     </div>
                     <div class="quick-routes">
                         <span class="quick-label">Tuyến Bắc - Nam:</span>
@@ -152,10 +152,28 @@
                         </div>
                         <div class="form-group">
                             <label>Giá (VND nghìn)</label>
-                            <input type="number" id="tour-price" placeholder="VD: 80" />
+                            <input type="number" id="tour-price" placeholder="VD: 80" min="0" />
+                            <div style="margin-top: 5px; display: flex; align-items: center; gap: 5px;">
+                                <input type="checkbox" id="tour-is-free" onchange="document.getElementById('tour-price').disabled = this.checked">
+                                <label for="tour-is-free" style="font-size: 0.75rem; color: var(--accent); cursor: pointer; margin-bottom: 0;">Miễn phí (Free)</label>
+                            </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary" onclick="addTourStop()">+ Thêm vào lịch trình</button>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="addTourStop('last')">+ Thêm xuống cuối (Add Last)</button>
+                        <button class="btn btn-outline" onclick="addTourStop('first')">↑ Thêm vào đầu (Add First)</button>
+                    </div>
+
+                    <div style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed var(--border);">
+                        <label style="font-size: 0.8rem; font-weight: 500; color: var(--text-muted); display: block; margin-bottom: 8px;">Chèn địa điểm mới SAU một điểm có sẵn:</label>
+                        <div class="form-row">
+                            <div class="form-group" style="max-width: 150px;">
+                                <label>Sau ID điểm này</label>
+                                <input type="text" id="tour-after-id" placeholder="VD: EG" />
+                            </div>
+                            <button class="btn btn-success" onclick="addTourStop('insert')">↳ Chèn vào giữa (Insert After)</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -186,7 +204,9 @@
                             <label>Nhập ID khách hàng</label>
                             <input type="text" id="customer-search-id" placeholder="VD: C001" />
                         </div>
-                        <button class="btn btn-primary" onclick="searchCustomer()">Tìm kiếm</button>
+                        <div style="display: flex; justify-content: flex-end; margin-top: 12px;">
+                            <button class="btn btn-primary" style="min-width: 140px;" onclick="searchCustomer()">Tìm kiếm</button>
+                        </div>
                         <div class="quick-routes" style="margin-top:12px">
                             <span class="quick-label">Thử ID:</span>
                             <button class="chip" onclick="quickSearch('C001')">C001</button>
@@ -216,33 +236,55 @@
                             <label>Số điện thoại</label>
                             <input type="text" id="cust-phone" placeholder="VD: 0901234567" />
                         </div>
-                        <button class="btn btn-success" onclick="addCustomer()">Thêm vào BST</button>
+                        <div style="display: flex; justify-content: flex-end; margin-top: 12px;">
+                            <button class="btn btn-primary" style="min-width: 140px;" onclick="addCustomer()">Thêm vào BST</button>
+                        </div>
                         <div id="customer-add-result" class="result-area hidden" style="margin-top:16px"></div>
                     </div>
                 </div>
 
-                <div class="info-box">
-                    <h4>🌳 Cây BST Khách Hàng (Dữ liệu mẫu)</h4>
-                    <div class="bst-viz">
-                        <div class="bst-level">
-                            <span class="bst-node root">C003</span>
-                        </div>
-                        <div class="bst-level">
-                            <span class="bst-node">C001</span>
-                            <span class="bst-node">C005</span>
-                        </div>
-                        <div class="bst-level">
-                            <span class="bst-node leaf">—</span>
-                            <span class="bst-node leaf">C002</span>
-                            <span class="bst-node leaf">C004</span>
-                            <span class="bst-node leaf">—</span>
-                        </div>
-                    </div>
-                    <p class="hint">💡 BST sắp xếp theo ID. Tìm C005: So sánh tại C003 → phải → C005. Chỉ 2 bước!</p>
+            <div class="info-box">
+                <h4>🌳 Cây BST Khách Hàng (Tự động cập nhật)</h4>
+                <div id="bst-visualizer" class="bst-viz-container">
+                    <div class="loading">Đang tải cấu trúc cây...</div>
                 </div>
+                <p class="hint">💡 Đây là sơ đồ **thực tế** từ Backend. Nhánh trái luôn nhỏ hơn, nhánh phải luôn lớn hơn Root.</p>
+                
+                <div style="display: flex; justify-content: center; margin-top: 20px; gap: 15px;">
+                    <button class="btn btn-outline" style="border-radius: 30px; padding: 10px 25px;"
+                        onclick="refreshBST()">
+                        🔄 Làm mới cây
+                    </button>
+                    <button class="btn btn-outline" style="border-radius: 30px; padding: 10px 25px;"
+                        onclick="loadCustomers()">
+                        📋 Xem danh sách (In-order)
+                    </button>
+                </div>
+                <div id="customer-list-container" class="hidden" style="margin-top: 20px;">
+                    <table class="customer-table" id="customer-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Họ tên</th>
+                                <th>Số điện thoại</th>
+                                <th style="width: 80px;">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customer-list-body"></tbody>
+                    </table>
+                </div>
+            </div>
             </section>
 
         </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p class="footer-main">© 2026 Travel Planner — Group 4</p>
+                <p class="footer-authors">Designed & Developed by anhmai_tuongvy</p>
+            </div>
+        </footer>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
