@@ -3,7 +3,6 @@ package com.travelplanner.app;
 import com.travelplanner.api.CustomerController;
 import com.travelplanner.api.MapController;
 import com.travelplanner.api.TourController;
-import com.travelplanner.entities.Customer;
 import com.travelplanner.entities.TourLocation;
 import com.travelplanner.structures.BinarySearchTree;
 import com.travelplanner.structures.TourLinkedList;
@@ -25,11 +24,7 @@ public class WebApp {
 
         // 2. BST - Customer database
         BinarySearchTree bst = new BinarySearchTree();
-        bst.insert(new Customer("C001", "Nguyen Van An", "0901234567"));
-        bst.insert(new Customer("C003", "Tran Thi Bich", "0912345678"));
-        bst.insert(new Customer("C002", "Le Minh Duc", "0987654321"));
-        bst.insert(new Customer("C005", "Pham Thi Lan", "0977123456"));
-        bst.insert(new Customer("C004", "Hoang Van Nam", "0966234567"));
+        // (Dữ liệu sẽ được tự động thêm trong CustomerController.seedData())
 
         // 3. Graph - Map with Dijkstra routes
         Graph graph = new Graph();
@@ -50,10 +45,16 @@ public class WebApp {
 
         // Tour routes (Linked List)
         app.get("/api/tour", tourCtrl::getAll);
-        app.post("/api/tour/add", tourCtrl::add);
+        app.post("/api/tour/add", tourCtrl::addLast);
+        app.post("/api/tour/addFirst", tourCtrl::addFirst);
+        app.post("/api/tour/insert", tourCtrl::insertAfter);
+        app.post("/api/tour/batch-add", tourCtrl::batchAdd);
+        app.put("/api/tour/update", tourCtrl::update);
         app.delete("/api/tour/{id}", tourCtrl::remove);
 
         // Customer routes (BST)
+        app.get("/api/customer/all", customerCtrl::getAll);
+        app.get("/api/customer/tree", customerCtrl::getTree);
         app.get("/api/customer/{id}", customerCtrl::search);
         app.post("/api/customer/add", customerCtrl::add);
         app.delete("/api/customer/{id}", customerCtrl::delete);
